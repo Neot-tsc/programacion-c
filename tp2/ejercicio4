@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+void menu(void);
+int nrorandom(int, int);/*da un numero ranom entero en un intervalo*/
+
+int main(void){
+	int x,y;
+	float a,b, raizA, potenciaA, logB;
+	printf("Ingrese dos numero naturales con el primero menor que es segudo: ");
+	scanf("%d %d",&x,&y);   
+	if ((x>0 && y>0) && (x<y))
+	{
+		srand(time(NULL));
+		a=nrorandom(x,y);
+		b=nrorandom(x,y);
+		menu();
+	}
+	
+	
+	
+	return 0;
+}
+	
+	int nrorandom(int x, int y){
+		int n;
+		n=x+rand()%(y-x+1);
+		/*variable = limite_inferior + rand()%(limite_superior - limite_inferior + 1)*/
+		return n;
+	}
+		
+		
+		void menu(void){
+			int op;
+			do
+			{
+				printf("\n**main menu**\n\n");
+				printf("\n1) ver la raiz cuadrada de a.");
+				printf("\n2) ver la potencia de a^b.");
+				printf("\n3) ver el logaritmo en base 10 de b.");
+				printf("\n0) salir.");
+				scanf("%d",&op);
+			} while (op<0 || op>3);
+			printf("\nUsted eligio la opcion no valia ingrese de nuevo");
+			
+			
+		}

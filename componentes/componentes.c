@@ -33,14 +33,16 @@ int maximo_comun_divisor(int, int);
 
 /*obtiene el maximo comun divisor*/
 /*#############################################################*/
+#define base 10
 
+void separa_entero_decimal(float, int*, int*);
+/*separa la parte entera de la parte decimal y 
+conbierte la parte decimal en etera (solo 4 digitos de precicion)*/
+/*#############################################################*/
 
+int cuenta_digitos(int);
 
-
-
-
-
-
+/*#############################################################*/
 
 
 
@@ -193,3 +195,28 @@ int maximo_comun_divisor(int a, int b){
 }
 
 /*#############################################################*/
+/*trabaja en conunto con cuentadigito
+y definiendo constante en 10 asi evalua sin inportar
+los digitos de precicion mas libreria math.h*/
+void separa_entero_decima(float x, int *entero, int *decimal){
+	int cant;
+    float aux;
+    aux=x;
+    *entero=(int)x;
+    aux=x-(int)x;
+    cant=cuenta_digitos(aux); 
+    *decimal=aux*pow(base,cant);
+}
+
+/*#############################################################*/
+
+int cuenta_digitos(int num){
+    int cant;
+    cant=0;
+    while (num!=0)
+    {
+        num=num/10;
+        cant++;
+    }
+    return cant;
+}

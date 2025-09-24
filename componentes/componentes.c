@@ -26,6 +26,20 @@ float comparacion(float, float);
 int invertir(int); 
 /*invierte los digitos de un numero*/
 /*#############################################################*/
+void entradafraccion(int*, int*);
+void salidafraccion(int, int);
+/*#############################################################*/
+int maximo_comun_divisor(int, int);
+
+/*obtiene el maximo comun divisor*/
+/*#############################################################*/
+
+
+
+
+
+
+
 
 
 
@@ -150,4 +164,32 @@ int invertir(int num){
 
 /*#############################################################*/
 	
+void entradafraccion(int*numerador, int*denominador){
+    printf("\ningrese el numerador: ");
+    scanf("%d",numerador);
+    do
+    {
+        printf("ingrese un denominador distinto de 0:");
+		scanf("%d",denominador);
+    } while (denominador==0);
+}
 
+void salidafraccion(int numerador, int denominador){
+	if(numerador==0 || denominador==1)
+		printf("%d\n", numerador);
+	else 
+		printf("\n%d/%d\n",numerador,denominador);
+}
+
+/*#############################################################*/
+
+int maximo_comun_divisor(int a, int b){
+    int i, mcd=1;
+    for(i=1; i<=a; i++){
+        if(a%i==0 && b%i==0)
+            mcd=i;
+    }
+    return mcd;
+}
+
+/*#############################################################*/

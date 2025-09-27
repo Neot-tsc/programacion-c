@@ -136,9 +136,9 @@ int cantDivisores(int num){
 /*#############################################################*/
 
 int determina_primo(int num){
-	int r;
+	int r,pd;
+    pd=2;
     if(num>0){
-        int pd=2;
         while((pd<=num/2) && (num%pd!=0))
         pd++;
         if((pd>num/2) && num!=1)

@@ -12,7 +12,7 @@ Nota: reutilizar el modulo generado en el inciso 5*/
 
 int cuenta_digitos(int);
 void separa_entero_decimal(float, int*, int*);
-void tranforma_num(int*);
+void transforma_num(int*);
 int invertir(int); 
 
 int main (void){
@@ -27,7 +27,7 @@ int main (void){
         transforma_num(&entera);
         transforma_num(&decimal);
         cant=cuenta_digitos(decimal);
-        numero=entera+decimal*pow(10,-cant);
+        numero=entera+decimal*pow(base,-cant);
         printf("\nnumero modificado: %.4f", numero);
     }
 
@@ -49,12 +49,12 @@ void separa_entero_decimal(float x, int *entero, int *decimal){
     float aux;
     aux=x;
     *entero=(int)x;
-    aux=x-(int)x;
+    aux=aux-(int)x;
     cant=cuenta_digitos(aux); 
     *decimal=aux*pow(base,cant);
 }
 
-void tranforma_num(int *x){
+void transforma_num(int *x){
     int aux,dig,nvnum;
     aux=*x;
     nvnum=0;

@@ -5,6 +5,8 @@
 #include <windows.h>
 
 
+
+
 /*#############################################################*/
 int menu();
 /*el menu simepre es una funcion*/
@@ -43,6 +45,19 @@ conbierte la parte decimal en etera (solo 4 digitos de precicion)*/
 int cuenta_digitos(int);
 
 /*#############################################################*/
+/*PROCEDIMIENTOS Y FUNCIONES DE VECTORES*/
+
+typedef int Tlista [10]; /*resuerda que camvia con respecto al tipo de dato ya sea int, float, char, etc*/
+/*entrada incondicionada*/
+void ingreso_condicionado_vector(Tlista,int*); /*ingresa la lista y conoce el tama�o dentro del procedimiento*/
+void mostrar_vector(Tlista, int); 
+/*entrada condicionada*/
+
+void ingreso_incondicionado_vector(Tlista,int*);
+
+/*#############################################################*/
+
+
 
 
 
@@ -121,9 +136,9 @@ int cantDivisores(int num){
 /*#############################################################*/
 
 int determina_primo(int num){
-	int r;
+	int r,pd;
+    pd=2;
     if(num>0){
-        int pd=2;
         while((pd<=num/2) && (num%pd!=0))
         pd++;
         if((pd>num/2) && num!=1)
@@ -220,3 +235,53 @@ int cuenta_digitos(int num){
     }
     return cant;
 }
+
+
+/*#############################################################*/
+/*#############################################################*/
+/*#############################################################*/
+/*#############################################################*/
+
+	
+	
+void ingreso_condicionado_vector(Tlista A,int *n){
+	int i;
+	printf("\ningrese el tama�o del vector: ");
+	scanf("%d",n);
+	for(i=1; i<=*n; i++){
+		printf("ingrese un elemento del vector: ");
+		scanf("%d",&A[i]);
+	}
+}
+
+void mostrar_vector(Tlista A, int n){
+	int i;
+	printf("elementos del vector:");
+	for(i=1; i<=n; i++)
+		printf("%d,",A[i]);
+} 
+	
+void ingreso_incondicionado_vector(Tlista A, int *n)
+{
+    int i;
+    i=1;
+    do
+    {
+        printf("ingrese un elemento: ");
+        scanf("%d", A[i]);
+        i++;
+    } while (A[i]!=0);
+    i--;
+    *n=i;
+}
+
+
+
+
+
+	
+	
+	
+
+
+

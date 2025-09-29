@@ -83,8 +83,6 @@ int nrorandom(int x, int y){
 	
 int menu(){
 	int op;
-	do
-	{
 		printf("\n**main menu**\n\n");
 		printf("\n1) ver la raiz cuadrada de a.");
 		printf("\n2) ver la potencia de a^b.");
@@ -92,7 +90,7 @@ int menu(){
 		printf("\n0) salir.");
 		printf("\ningrese una opcion: ");
 		scanf("%d",&op);
-		} while (op!=0);
+	
 	return op;
 }
 /*dentro del main */

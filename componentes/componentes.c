@@ -48,18 +48,46 @@ int cuenta_digitos(int);
 /*PROCEDIMIENTOS Y FUNCIONES DE VECTORES*/
 
 typedef int Tlista [10]; /*resuerda que camvia con respecto al tipo de dato ya sea int, float, char, etc*/
-/*entrada incondicionada*/
+/*entrada condicionada*/
 void ingreso_condicionado_vector(Tlista,int*); /*ingresa la lista y conoce el tama�o dentro del procedimiento*/
 void mostrar_vector(Tlista, int); 
-/*entrada condicionada*/
+/*entrada incondicionada*/
 
 void ingreso_incondicionado_vector(Tlista,int*);
 
 /*#############################################################*/
 
+void ordenamiento_seleccion_directa(Tlista, int);
 
+/*#############################################################*/
+void insertar_un_elemento_al_final(Tlista, int* );
 
+/*#############################################################*/
+void insertar_un_elemento(Tlista, int*, int, int);
 
+/*#############################################################*/
+void eliminar_un_elemento(Tlista,int*);
+
+/*#############################################################*/
+/*de un vector*/
+void mostrar_primos(Tlista, int);
+
+/*#############################################################*/
+
+	/*encuentra la posicion de manera ordenada*/
+
+int determinar_pos(Tlista , int , int );
+	
+	/*inserta un numero en el vector manteniendo el orden, recibiendo el nuevo y la pos*/
+	
+void insertar_un_elemento(Tlista , int*, int, int);
+	
+	/*inserccion de baraja (inserta manteniendo el orden)*/
+	
+void insertar_baraja_tamaño_conocido(Tlista , int );
+void insertar_baraja_tamaño_desconocido(Tlista a, int *n);
+int busqueda_binaria(Tlista , int , int);
+int busqueda_secuencial(Tlista, int, int);	
 
 /*77777777777777777777777777777777777777777777777777777777777777777777777777777777777*/
 int main(void){}

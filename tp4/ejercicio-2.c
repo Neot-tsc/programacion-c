@@ -200,7 +200,7 @@ void insertar_baraja_tamanio_conocido(Tlista a, int n){
 		j=i-1;
 		while(a[0]<a[j]){
 			a[j+1]=a[j];
-			j=j--;
+			j--;
 		}
 		a[j+1]=a[0];
 	}

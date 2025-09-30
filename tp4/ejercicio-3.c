@@ -6,6 +6,7 @@ resultante. */
 
 
 #include <stdio.h>
+#include <ctype.h>
 #define max 50
 
 typedef char Tlista[max];
@@ -91,3 +92,6 @@ void ordenar_vector(Tlista c, int n){
         }
     }
 }
+
+	
+

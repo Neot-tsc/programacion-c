@@ -315,7 +315,95 @@ void agregar_uno(Tlista a, int*n, int nuevo){
 }
 
 
+	/*encuentra la posicion de manera ordenada*/
+int determinar_pos(Tlista a, int n, int x){
+	int i,ban,pos; 
+	i=1;
+	ban=1;
+	while(ban==1){
+		if(a[i]<x && a[i+1]>x){
+			pos=1;
+			ban=0;
+		}
+	}
+	return pos;
+}
+
+void insertar_un_elemento(Tlista a, int* n, int nuevo, int pos){
+	int i;
+	for(i=1; i<=pos; i++)
+		a[i+1]=a[i];
+	a[pos]=nuevo;
+	*n=*n+1;
+}
+
+	/*inserccion de baraja (inserta manteniendo el orden)*/
+
+void insertar_baraja_tamanio_conocido(Tlista a, int n){
+	int i, j;
+	i=1;
+	printf("\ningrese un elemento:");
+	scanf("%d", &a[i]);
+	for(i=2; i<=n; i++){
+		printf("\ningrese un elemento:");
+		scanf("%d", &a[i]);
+		a[0]=a[i];
+		j=i-1;
+		while(a[0]<a[j]){
+			a[j+1]=a[j];
+			j--;
+		}
+		a[j+1]=a[0];
+	}
+}
+
+	/*inserccion de baraja (inserta manteniendo el orden)*/
+
+void insertar_baraja_tama�o_desconocido(Tlista a, int *n){
+	int i,j;
+	*n=1;
+	do{
+		printf("\ningrese un elemento (igrese 0 para terminar)");
+		scanf("%d",&a[i]);
+		a[0]=a[i];
+		j=i-1;
+		while(a[0]<a[j]){
+			a[j+1]=a[j];
+			j--;
+		}
+		a[j+1]=a[0];
+		*n=*n+1;
+	}while (a[i]!= 0);/*la condicion tiene que ser distinta*/
+	*n=*n-1;
+}	
+
+int busqueda_binaria(Tlista a, int n, int buscado){
+	int ini, fin, med, r;
+	ini=1;fin=n;med=(ini+fin)/2;
+	while(ini<=fin && a[med]!=buscado){
+		if(a[med]<buscado)
+			ini=med++;
+		else 
+			fin=med--;
+		med=(ini+fin)/2;
+	}
+	if(ini<=fin)
+		r=med;
+	else
+		r=0;
+	return r;
+}
 	
+int busqueda_secuencial(Tlista a, int n, int buscado){
+	int i,pos;
+	i=1;
+	while(i<=n && a[i]!= buscado)
+		i++;
+	if(i<n)
+		pos=i;
+	else pos=0;
+	return pos;
+}
 	
 	
 

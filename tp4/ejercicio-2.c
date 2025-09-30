@@ -222,7 +222,7 @@ void insertar_baraja_tama�o_desconocido(Tlista a, int *n){
 		}
 		a[j+1]=a[0];
 		*n=*n+1;
-	}while (a[i]!= 0)/*la condicion tiene que ser distinta*/
+	}while (a[i]!= 0);/*la condicion tiene que ser distinta*/
 	*n=*n-1;
 }	
 
@@ -252,7 +252,7 @@ int busqueda_secuencial(Tlista a, int n, int buscado){
 	if(i<n)
 		pos=i;
 	else pos=0;
-	return pos
+	return pos;
 }
 
 

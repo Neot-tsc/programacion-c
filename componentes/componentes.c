@@ -274,7 +274,17 @@ void ingreso_incondicionado_vector(Tlista A, int *n)
 }
 
 
-
+void agregar_uno(Tlista a, int*n, int nuevo){
+    int i;
+    i=*n;
+    a[0]=nuevo;
+    while(a[i]>nuevo){
+        a[i+1]=a[i];
+        i--;
+    }
+    a[i+1]=nuevo;
+    *n=*n+1;
+}
 
 
 	

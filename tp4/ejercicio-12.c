@@ -16,7 +16,7 @@ e) Mostrar la lista de miembros. */
 #define max 50
 
 /*defino los tipos de arreglos que usara el prgrama*/
-typedef long long int Tlista[max];
+typedef long int Tlista[max];
 typedef char Tchar[max];
 
 /*cabecera de funciones y procedimientos*/
@@ -24,10 +24,13 @@ typedef char Tchar[max];
 void ingreso_baraja(Tlista, Tlista, Tlista, Tchar, int*);
 void mostrar_vector(Tlista, Tlista,Tlista, Tchar,int);
 int menu(void);
-int busqueda_binaria(Tlista, int, long long int);
-void eliminar_uno(Tlista, Tlista, Tlista, Tchar, int*, long long int);
-void agregar_uno(Tlista, Tlista, Tlista, Tchar, int*);
-void mostrar_por_estado(Tlista, Tlista, Tlista, Tchar, int, char);
+int busqueda_binaria_numero(Tlista, int, long int);
+
+int busqueda_binaria_caracter(Tlista, int, long int);
+
+void eliminar_uno(Tlista, Tlista, Tlista, Tchar, int*, int);
+void agregar_uno(Tlista, Tlista, Tlista, Tchar, int*,int, long int);
+void mostrar_uno(Tlista, Tlista, Tlista, Tchar, int);
 
 /*inicio del main*/
 
@@ -35,39 +38,50 @@ int main (void){
     Tlista dni, celular, edad;
     Tchar estado;
     int n, op, pos;
-    long long int buscado;
+    long int buscado, nuevo;
+	char caracter_buscado;
     ingreso_baraja(dni, celular, edad, estado, &n);
     do{
         op=menu();
         switch(op){
             case 1:
                 printf("Ingrese el DNI a buscar: ");
-                scanf("%lld",&buscado);
+                scanf("%ld",&buscado);
                 pos=busqueda_binaria(dni,n,buscado);
                 if(pos!=0)
-                    printf("El miembro con DNI %lld se encuentra en la posicion %d de la lista\n",buscado,pos);
+                    printf("El miembro con DNI %ld se encuentra en la posicion %d de la lista\n",buscado,pos);
                 else
-                    printf("El miembro con DNI %lld no se encuentra en la lista\n",buscado);
+                    printf("El miembro con DNI %ld no se encuentra en la lista\n",buscado);
                 break;
             case 2: 
                 printf("Ingrese el DNI a eliminar: ");
-                scanf("%lld",&buscado);
+                scanf("%ld",&buscado);
                 pos=busqueda_binaria(dni,n,buscado);
                 if(pos!=0){
                     eliminar_uno(dni, celular, edad, estado, &n, pos);
-                    printf("El miembro con DNI %lld fue eliminado de la lista\n",buscado);
+                    printf("El miembro con DNI %ld fue eliminado de la lista\n",buscado);
                 }
                 else
-                    printf("El miembro con DNI %lld no se encuentra en la lista\n",buscado);
+                    printf("El miembro con DNI %ld no se encuentra en la lista\n",buscado);
                 break;
             case 3:
-                agregar_uno(dni, celular, edad, estado, &n);
-                printf("\nMiembro agregado correctamente\n");
+				if(n<max){
+					printf("\ningres el dni del mimebro (ingrese -1 para terminar):");
+					scanf("%ld",&nuevo);
+					if((pos=busqueda_binaria(dni,n, nuevo))==0){
+						agregar_uno(dni, celular, edad, estado, &n, pos, nuevo);
+						printf("\nMiembro agregado correctamente\n");
+					}
+					else
+					   printf("\nel miembro ya existe en la lista.");
+				}
+				else 
+				   printf("lista al maximo de su capacidad");
                 break;
             case 4:
                 printf("Ingrese el estado a buscar (C, S, V, W): ");
                 fflush(stdin);
-                scanf("%c",&buscado);
+                scanf("%c",&caracter_buscado);
                 mostrar_por_estado(dni, celular, edad, estado, n, buscado);
                 break;  
             case 5:
@@ -97,15 +111,15 @@ void ingreso_baraja(Tlista a, Tlista b, Tlista c, Tchar e, int* n){
     {
         if(i<max){
             printf("\ningres el dni del mimebro (ingrese -1 para terminar):");
-			scanf("%lld",&a[i]);
+			scanf("%ld",&a[i]);
 			if(a[i]>0){
 				printf("\ningres el celular:");
-				scanf("%lld",&b[i]);
+				scanf("%ld",&b[i]);
 				printf("\ningres el estado:");
 				fflush(stdin);
 				scanf("%c",&e[i]);
 				printf("\ningres la edad del miembro:");
-				scanf("%lld",&c[i]);
+				scanf("%ld",&c[i]);
 				a[0]=a[i];
 				b[0]=b[i];
 				c[0]=c[i];
@@ -138,10 +152,10 @@ void mostrar_vector(Tlista a, Tlista b, Tlista c, Tchar e,int n){
 	printf("elementos del vector:");
 	for(i=1; i<=n; i++){
         printf("\n\nempleado nro %d:",i);
-		printf("\ndni: %lld,",a[i]);
-        printf("\ncelular: %lld,",b[i]);
+		printf("\ndni: %ld,",a[i]);
+        printf("\ncelular: %ld,",b[i]);
         printf("\nestado: %c,",e[i]);
-        printf("\nedad: %lld,",c[i]);
+        printf("\nedad: %ld,",c[i]);
     }
 } 
 
@@ -156,9 +170,10 @@ int menu(void){
         printf("\n0. salir del programa.");
         printf("\n\ningrese una opcion: ");
         scanf("%d",&op);
+		return op;
 }
 
-int busqueda_binaria(Tlista a, int n, long long int buscado){
+int busqueda_binaria(Tlista a, int n, long int buscado){
     int ini, fin, med, pos;
     ini=1;
     fin=n;
@@ -177,7 +192,7 @@ int busqueda_binaria(Tlista a, int n, long long int buscado){
     return pos;
 }
 
-void eliminar_uno(Tlista a, Tlista b, Tlista c, Tchar e, int*n, long long int pos){
+void eliminar_uno(Tlista a, Tlista b, Tlista c, Tchar e, int*n, int pos){
     int i;
     for(i=pos; i<*n; i++){
 		a[i]=a[i+1];
@@ -188,20 +203,15 @@ void eliminar_uno(Tlista a, Tlista b, Tlista c, Tchar e, int*n, long long int po
 	(*n)--;
 }
 
-void agregar_uno(Tlista a, Tlista b, Tlista c, Tchar e, int*n){
-    int pos;
-    long long int dni, celular, edad;
-    char estado;
-    printf("\ningres el dni del mimebro (ingrese -1 para terminar):");
-	scanf("%lld",&a[0]);
-    if(*n<max && busqueda_binaria(a, *n, a[0])==0){
+void agregar_uno(Tlista a, Tlista b, Tlista c, Tchar e, int*n, int pos, long int nuevo){
+		a[0]=nuevo;
         printf("\ningres el celular:");
-        scanf("%lld",&b[0]);
+        scanf("%ld",&b[0]);
         printf("\ningres el estado:");
         fflush(stdin);
         scanf("%c",&e[0]);
         printf("\ningres la edad del miembro:");
-        scanf("%lld",&c[0]);
+        scanf("%ld",&c[0]);
         pos=*n;
         while(a[0]<a[pos] && pos>0){
             a[pos+1]=a[pos];
@@ -215,20 +225,12 @@ void agregar_uno(Tlista a, Tlista b, Tlista c, Tchar e, int*n){
         c[pos+1]=c[0];
         e[pos+1]=e[0];
         (*n)++;
-    }
-    else
-        printf("No se puede agregar el miembro, ya que se alcanzo el maximo o el dni ya existe");
 }
 
-void mostrar_por_estado(Tlista a, Tlista b, Tlista c, Tchar e, int n, char buscado){
-    int i;
-    for(i=1; i<=n; i++){
-        if(e[i]==buscado){
-            printf("\n\nempleado nro %d:",i);
-            printf("\ndni: %lld,",a[i]);
-            printf("\ncelular: %lld,",b[i]);
-            printf("\nestado: %c,",e[i]);
-            printf("\nedad: %lld,",c[i]);
-        }
-    }
+void mostrar_uno(Tlista a, Tlista b, Tlista c, Tchar e, int pos){
+		printf("\n\nempleado nro %d:",i);
+		printf("\ndni: %ld,",a[i]);
+		printf("\ncelular: %ld,",b[i]);
+		printf("\nestado: %c,",e[i]);
+		printf("\nedad: %ld,",c[i]);
 }

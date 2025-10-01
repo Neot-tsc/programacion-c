@@ -421,3 +421,14 @@ void leecad(Tcad cadena, int tam){/*tam tamanio maximo*/
 }
 
 
+void agrega_uno(Tlista a, int *n, int nuevo){
+	int i;
+	i=*n;
+	a[0]=nuevo;
+	while(a[i]>nuevo){
+		a[i+1]=a[i];
+		i--;
+	}
+	a[i+1]=nuevo;
+	(*n)++;
+}

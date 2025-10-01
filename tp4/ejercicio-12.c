@@ -228,9 +228,9 @@ void agregar_uno(Tlista a, Tlista b, Tlista c, Tchar e, int*n, int pos, long int
 }
 
 void mostrar_uno(Tlista a, Tlista b, Tlista c, Tchar e, int pos){
-		printf("\n\nempleado nro %d:",i);
-		printf("\ndni: %ld,",a[i]);
-		printf("\ncelular: %ld,",b[i]);
-		printf("\nestado: %c,",e[i]);
-		printf("\nedad: %ld,",c[i]);
+		printf("\n\nempleado nro %d:",pos);
+		printf("\ndni: %ld,",a[pos]);
+		printf("\ncelular: %ld,",b[pos]);
+		printf("\nestado: %c,",e[pos]);
+		printf("\nedad: %ld,",c[pos]);
 }

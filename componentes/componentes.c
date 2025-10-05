@@ -4,7 +4,9 @@
 #include <time.h>
 #include <windows.h>
 
+#define max 50
 
+typedef char Tcad[max];
 
 
 /*#############################################################*/
@@ -47,7 +49,7 @@ int cuenta_digitos(int);
 /*#############################################################*/
 /*PROCEDIMIENTOS Y FUNCIONES DE VECTORES*/
 
-typedef int Tlista [10]; /*resuerda que camvia con respecto al tipo de dato ya sea int, float, char, etc*/
+typedef int Tlista [max]; /*resuerda que camvia con respecto al tipo de dato ya sea int, float, char, etc*/
 /*entrada condicionada*/
 void ingreso_condicionado_vector(Tlista,int*); /*ingresa la lista y conoce el tama�o dentro del procedimiento*/
 void mostrar_vector(Tlista, int); 
@@ -302,17 +304,13 @@ void ingreso_incondicionado_vector(Tlista A, int *n)
 }
 
 
-void agregar_uno(Tlista a, int*n, int nuevo){
-    int i;
-    i=*n;
-    a[0]=nuevo;
-    while(a[i]>nuevo){
-        a[i+1]=a[i];
-        i--;
-    }
-    a[i+1]=nuevo;
-    *n=*n+1;
-}
+
+
+
+	
+	
+	
+
 
 
 	/*encuentra la posicion de manera ordenada*/
@@ -327,8 +325,8 @@ int determinar_pos(Tlista a, int n, int x){
 		}
 	}
 	return pos;
-}
-
+}	
+	/*inserta un numero en el vector manteniendo el orden*/
 void insertar_un_elemento(Tlista a, int* n, int nuevo, int pos){
 	int i;
 	for(i=1; i<=pos; i++)
@@ -336,7 +334,8 @@ void insertar_un_elemento(Tlista a, int* n, int nuevo, int pos){
 	a[pos]=nuevo;
 	*n=*n+1;
 }
-
+	
+	
 	/*inserccion de baraja (inserta manteniendo el orden)*/
 
 void insertar_baraja_tamanio_conocido(Tlista a, int n){
@@ -355,7 +354,7 @@ void insertar_baraja_tamanio_conocido(Tlista a, int n){
 		}
 		a[j+1]=a[0];
 	}
-}
+}	
 
 	/*inserccion de baraja (inserta manteniendo el orden)*/
 
@@ -376,6 +375,7 @@ void insertar_baraja_tama�o_desconocido(Tlista a, int *n){
 	}while (a[i]!= 0);/*la condicion tiene que ser distinta*/
 	*n=*n-1;
 }	
+
 
 int busqueda_binaria(Tlista a, int n, int buscado){
 	int ini, fin, med, r;
@@ -404,8 +404,31 @@ int busqueda_secuencial(Tlista a, int n, int buscado){
 	else pos=0;
 	return pos;
 }
-	
-	
+
+void leecad(Tcad cadena, int tam){/*tam tamanio maximo*/
+	int j;
+	char c;
+	j=0;
+	c=getchar();
+	while(c!=EOF && c!='\n' && j<tam-1){
+		cadena[j]=c;
+		j++;
+		c=getchar();
+	}
+	cadena[j]='\0';
+	while(c!=EOF && c!='\n')
+		c=getchar();
+}
 
 
-
+void agrega_uno(Tlista a, int *n, int nuevo){
+	int i;
+	i=*n;
+	a[0]=nuevo;
+	while(a[i]>nuevo){
+		a[i+1]=a[i];
+		i--;
+	}
+	a[i+1]=nuevo;
+	(*n)++;
+}

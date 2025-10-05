@@ -11,6 +11,8 @@ d) Dado un estado ingresado por teclado, mostrar la información de los registro
 estado solicitado.    
 e) Mostrar la lista de miembros. */
 
+
+/*inicio del programa ##el programa tiene muchas advertencias pero es por el long long int##*/
 #include <stdio.h>
 /*defino tamanio maximo*/
 #define max 50
@@ -27,7 +29,6 @@ int menu(void);
 int busqueda_binaria(Tlista, int, long long int);
 void eliminar_uno(Tlista, Tlista, Tlista, Tchar, int*, long long int);
 void agregar_uno(Tlista, Tlista, Tlista, Tchar, int*);
-int busqueda_secuencial(Tchar, int, char,int);
 void mostrar_por_estado(Tlista, Tlista, Tlista, Tchar, int, char);
 
 /*inicio del main*/
@@ -89,9 +90,12 @@ int main (void){
 
     return 0;
 }
+	
+/*fin del main*/
 
 /*cuerpo de funciones y procedimientos*/
-/*ordena mientra ingresan los elementos por el dni de menor  amayor*/
+	
+/*ordena mientra ingresan los elementos por el dni de menor  a mayor*/
 void ingreso_baraja(Tlista a, Tlista b, Tlista c, Tchar e, int* n){
     int i,j,ban;
 	ban=1;
@@ -147,7 +151,7 @@ void mostrar_vector(Tlista a, Tlista b, Tlista c, Tchar e,int n){
         printf("\nedad: %lld,",c[i]);
     }
 } 
-
+/*menu de opciones para el usuario*/
 int menu(void){
     int op;
         printf("\n**** MENU ****\n\n");
@@ -162,6 +166,8 @@ int menu(void){
 		return op;
 }
 
+	
+/*como el vector esta ordenao en base al dni uso busqueda binaria*/	
 int busqueda_binaria(Tlista a, int n, long long int buscado){
     int ini, fin, med, pos;
     ini=1;
@@ -181,6 +187,7 @@ int busqueda_binaria(Tlista a, int n, long long int buscado){
     return pos;
 }
 
+/*elimina un elemento en base al dni*/
 void eliminar_uno(Tlista a, Tlista b, Tlista c, Tchar e, int*n, long long int pos){
     int i;
     for(i=pos; i<*n; i++){
@@ -192,6 +199,7 @@ void eliminar_uno(Tlista a, Tlista b, Tlista c, Tchar e, int*n, long long int po
 	(*n)--;
 }
 
+/*agrega uno mantenieno el orden*/
 void agregar_uno(Tlista a, Tlista b, Tlista c, Tchar e, int*n){
     int pos;
     long long int dni, celular, edad;
@@ -225,6 +233,8 @@ void agregar_uno(Tlista a, Tlista b, Tlista c, Tchar e, int*n){
         printf("No se puede agregar el miembro, el dni ya existe");
 }
 
+/*muestra los vectores pro el estado ingresado por el usuario*/
+	
 void mostrar_por_estado(Tlista a, Tlista b, Tlista c, Tchar e, int n, char buscado){
     int i;
     for(i=1; i<=n; i++){
@@ -236,15 +246,4 @@ void mostrar_por_estado(Tlista a, Tlista b, Tlista c, Tchar e, int n, char busca
             printf("\nedad: %lld,",c[i]);
         }
     }
-}
-
-
-int busqueda_secuencial(Tchar a, int n, char buscado, int i){
-    int pos;
-    while(i<=n && a[i]!= buscado)
-        i++;
-    if(i<=n)
-        pos=i;
-    else pos=0;
-    return pos;
 }

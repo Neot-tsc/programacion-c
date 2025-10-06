@@ -26,7 +26,7 @@ int main(void){
     int n;
     n=0;
     cargar_elemento(dni,fecha,nomyape,&n);
-	mostrar(dni,fecha, nomyape, n);
+    mostrar(dni, fecha, nomyape, n);
     return 0;
 }
 
@@ -58,16 +58,14 @@ void agrega_uno(Tnum a, int *n, long int nuevo){
 }       
 void cargar_elemento(TlistaNum dni, TlistaNum fecha, TlistaCad nomyape, int*n){
     long int nuevo;
-	int i;
     printf("\ningrese el dni: ");
     scanf("%ld", &nuevo);
-    agrega_uno(dni[i], n, nuevo);
+    agrega_uno(dni, n, nuevo);
     printf("\ningrese el apelido y el nombre: ");
-	fflush(stdin);
     leecad(nomyape[*n+1]);
     printf("\ningrese la fecha de nacimiento: ");
     scanf("%ld",&nuevo);
-    agrega_uno(fecha[i], n,nuevo);
+    agrega_uno(fecha, n,nuevo);
 }
 
 

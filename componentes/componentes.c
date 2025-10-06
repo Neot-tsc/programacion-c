@@ -405,19 +405,20 @@ int busqueda_secuencial(Tlista a, int n, int buscado){
 	return pos;
 }
 
-void leecad(Tcad cadena, int tam){/*tam tamanio maximo*/
-	int j;
-	char c;
-	j=0;
-	c=getchar();
-	while(c!=EOF && c!='\n' && j<tam-1){
-		cadena[j]=c;
-		j++;
-		c=getchar();
-	}
-	cadena[j]='\0';
-	while(c!=EOF && c!='\n')
-		c=getchar();
+void leecad(Tcad cadena){/*no ingreso tamaio maximo or que es una variable global max
+	*/
+    char c;
+    int j;
+    j=0;
+    c=getchar();
+    while(c!=EOF && c!='\n' && j<max-1){
+        cadena[j]=c;
+        j++;
+        c=getchar();
+    }
+    cadena[j]='\0';
+    while (c!=EOF && c!='\n')
+        c=getchar();
 }
 
 

@@ -9,31 +9,46 @@ nota: usar TD registro para representar cada circuo y cada punto*/
 #include <stdio.h>
 #include <math.h>
 
+//definicion de variable global
 #define max 50
 
+//definicion del tipo de dato cadena
 typedef char Tcad[max];
 
+//definicion del TDstruct de punto del circulo
 typedef struct{
 	float x,y;
 }punto;
 
+//definicion del TDstruct del circulo
 typedef struct{
 	Tcad nombre;
 	punto coordenada;
 	float radio;
 }Tdatos;
 
+//definicion del vector de puntos a evaluar
 typedef punto puntos[max];
 
+//###funcion y procedimientos### 
 
+//procedimiento de ingreso de cadena
 void leecad(Tcad);
+
+//funciones y procedimientos de strct Tdato
 Tdatos ingresa_uno();
+
+//funciones y procedimientos del vector puntos
 punto ingresa_un_punto();
 void cargar_puntos(puntos, int*);
 void mostrar_puntos(puntos, int);
-float distancia(punto, puntos);
+float distancia(punto, punto);
+
+//procedimiento que evalua el Tdatos y el vector de puntos
 void evaluar(Tdatos, puntos, int);
 
+
+//inicio de la funcion main
 int main(int argc, char *argv[]) {
 	Tdatos circulo;
 	puntos p;
@@ -41,9 +56,11 @@ int main(int argc, char *argv[]) {
 	circulo=ingresa_uno();
 	cargar_puntos(p,&n);
 	mostrar_puntos(p,n);
+	evaluar(circulo,p,n);
 	return 0;
 }
 
+//cuerpo de las funciones y rocedimientos en orden
 void leecad(Tcad cad){
 	int j;
 	char c;
@@ -93,14 +110,14 @@ void mostrar_puntos(puntos p, int n){
 	for (i=1; i<=n; i++)
 	{
 		
-		printf("\npunto %d:(x,y)= (%f,%f)", i,p[i].x, p[i].y);
+		printf("\npunto %d:(x,y)= (%.2f,%.2f)", i,p[i].x, p[i].y);
 	}
 	
 }
-float distancia(punto centro, puntos evaluar){
+float distancia(punto centro, punto evaluar){
 	float d, primero, segundo, ambos;
-	primero=pow(evaluar->x-centro.x,2);
-	segundo=pow(evaluar->y-centro.y,2);
+	primero=pow(evaluar.x-centro.x,2);
+	segundo=pow(evaluar.y-centro.y,2);
 	ambos=primero+segundo;
 	d=sqrt(ambos);
 	return d;
@@ -112,10 +129,10 @@ void evaluar(Tdatos c, puntos p, int n){
 	for(i=1; i<=n; i++){
 		dis=distancia(c.coordenada,p[i]);
 		if(dis<c.radio)
-			printf("\nel punto (%f,%f) es punto interior del circulo", p[i].x,p[i].y);
+			printf("\nel punto (%.2f,%.2f) es punto interior del circulo", p[i].x,p[i].y);
 		else if(dis==c.radio)
-				printf("\nel punto (%f,%f), es un punto sobre el circulo", p[i].x,p[i].y);
+				printf("\nel punto (%.2f,%.2f), es un punto sobre el circulo", p[i].x,p[i].y);
 				else 
-					printf("\nel punto (%f,%f), es un punto exterior", p[i].x,p[i].y);
+					printf("\nel punto (%.2f,%.2f), es un punto exterior", p[i].x,p[i].y);
 	}
 }

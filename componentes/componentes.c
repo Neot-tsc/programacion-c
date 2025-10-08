@@ -434,3 +434,84 @@ void agrega_uno(Tlista a, int *n, int nuevo){
 	a[i+1]=nuevo;
 	(*n)++;
 }
+// tamanio de cadena contando el espacio 0
+ int t;
+ int tam_cad(Tcad);
+ int tam_cad(Tcad cadena){
+	int i;
+	i=0;
+	while(cadena[i]!='\0')
+		i++;
+	return i;
+ }
+
+
+/*#######################################################################################################
+##########################################################################################################*/
+
+// tipo de dato STRUCT
+// estructuras anidadas
+typedef struct 
+{
+	int dia,mes,anio;
+}Tcalendario;
+
+typedef struct
+{
+	Tcad barrio;
+	Tcad localidad;	
+} Tubicacion;
+typedef struct
+{
+	int dni;
+	int calificacion;
+	Tcad nombreyapellido;
+	Tubicacion direccion;
+	Tcalendario fecha;
+}Tdatos;
+
+
+typedef Tdatos personales[max];
+
+ //dentro del main
+
+int main(void){
+	personales alumno;
+
+	return 0;
+}
+ //funciones y procedientos de struct
+
+
+//cargar uno 
+
+Tdatos agregar_uno(){
+	Tdatos aux;
+	printf("ingrese nombre:");
+	fflush(stdin);
+	leecad(aux.nombreyapellido);
+	printf("ingrese el dni:");
+	scanf("%d", &aux.dni);
+	printf("ingrese la calificacion: ");
+	scanf("%d", &aux.calificacion);
+	printf("ingrese el barrio donde vive: ");
+	fflush(stdin);
+	leecad(aux.direccion.barrio);
+	printf("ingrese la localidad donde vive: ");
+	fflush(stdin);
+	leecad(aux.direccion.localidad);
+	printf("ingrese el dia de nacimiento: ");
+	scanf("%d", &aux.fecha.dia);
+	printf("ingrese el mes de nacimiento: ");
+	scanf("%d", &aux.fecha.mes);
+	printf("ingrese el anio de nacimiento: ");
+	scanf("%d", &aux.fecha.anio);
+	return aux;
+};
+
+void cargar_vector(personales alumno, int n){
+	int i;
+	for(i=1; i<=n; i++){
+		alumno[i]=agrega_uno();
+	}
+}

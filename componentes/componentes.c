@@ -303,7 +303,21 @@ void ingreso_incondicionado_vector(Tlista A, int *n)
     *n=i;
 }
 
-
+void ordenamiento_seleccion_directa(Tlista lista, int n){
+	int i,j;
+	int aux;
+	for (i=1; i<n; i++)
+	{
+		for(j=i+1; j<=n; j++){
+			if(lista[j]<lista[i]){
+				aux=lista[j];
+				lista[j]=lista[i];
+				lista[i]=aux;
+			}
+		}
+	}
+	
+};
 
 
 
@@ -453,30 +467,29 @@ void agrega_uno(Tlista a, int *n, int nuevo){
 // estructuras anidadas
 typedef struct 
 {
-	int dia,mes,anio;
-}Tcalendario;
+    int dia,mes,anio;
+}calendario;
 
 typedef struct
 {
-	Tcad barrio;
-	Tcad localidad;	
-} Tubicacion;
-typedef struct
+    Tcad cuidad,barrio,calle,departamento;
+    int numero;
+}ubicacion;
+
+typedef struct 
 {
-	int dni;
-	int calificacion;
-	Tcad nombreyapellido;
-	Tubicacion direccion;
-	Tcalendario fecha;
-}Tdatos;
+    Tcad apeynom;
+    long int DNI;
+    calendario fecha;
+    ubicacion domicilio;
+}Dpersonales;
 
-
-typedef Tdatos personales[max];
+typedef Dpersonales datos[max];
 
  //dentro del main
 
 int main(void){
-	personales alumno;
+	datos alumno;
 
 	return 0;
 }
@@ -485,21 +498,27 @@ int main(void){
 
 //cargar uno 
 
-Tdatos agregar_uno(){
-	Tdatos aux;
-	printf("ingrese nombre:");
+Dpersonales agregar_uno(){
+	Dpersonales aux;
+    printf("ingrese nombre:");
 	fflush(stdin);
-	leecad(aux.nombreyapellido);
+	leecad(aux.apeynom);
 	printf("ingrese el dni:");
-	scanf("%d", &aux.dni);
-	printf("ingrese la calificacion: ");
-	scanf("%d", &aux.calificacion);
+	scanf("%ld", &aux.DNI);
 	printf("ingrese el barrio donde vive: ");
-	fflush(stdin);
-	leecad(aux.direccion.barrio);
-	printf("ingrese la localidad donde vive: ");
-	fflush(stdin);
-	leecad(aux.direccion.localidad);
+    fflush(stdin);
+    leecad(aux.domicilio.barrio);
+    printf("ingrese la ciudad donde vive: ");
+    fflush(stdin);
+    leecad(aux.domicilio.cuidad);
+    printf("ingrese la calle donde vive: ");
+    fflush(stdin);
+    leecad(aux.domicilio.calle);
+    printf("ingrese el departamento donde vive: ");
+    fflush(stdin);
+    leecad(aux.domicilio.departamento);
+    printf("ingrese el numero de casa: ");
+	scanf("%d", &aux.domicilio.numero);
 	printf("ingrese el dia de nacimiento: ");
 	scanf("%d", &aux.fecha.dia);
 	printf("ingrese el mes de nacimiento: ");
@@ -509,9 +528,34 @@ Tdatos agregar_uno(){
 	return aux;
 };
 
-void cargar_vector(personales alumno, int n){
-	int i;
-	for(i=1; i<=n; i++){
-		alumno[i]=agrega_uno();
-	}
+void genera_vector(datos personales, int*n){
+    int i;
+    printf("\ningres el tamanio del vector:");
+    scanf("%d",n);
+    for (i=1; i<=*n; i++){
+        printf("\ningrese los datos de la persona %d\n",i);
+        personales[i]=agrega_uno();
+    }
 }
+
+void mostrar_uno(Dpersonales datos){
+    printf("\napellido y nombre: %s",datos.apeynom);
+    printf("\nDNI: %ld", datos.DNI);
+    printf("\nfecha de nacimiento: %d/%d/%d",datos.fecha.dia,datos.fecha.mes,datos.fecha.anio);
+    printf("\nciudad donde vive: %s",datos.domicilio.cuidad);
+    printf("\ndepartamento donde vive: %s",datos.domicilio.departamento);
+    printf("\nbarrio donde vive: %s",datos.domicilio.barrio);
+    printf("\ncalle donde vive: %s",datos.domicilio.calle);
+    printf("\nnum de cada: %d",datos.domicilio.numero);
+}
+
+void mostrar_vector(datos datos, int n){
+    int i;
+    printf("\nelementos del vector");
+    for (i=1; i<=n; i++){
+        printf("\n\ndatos de la persona %d\n",i);
+        mostrar_uno(datos[i]);
+    }
+}
+
+

@@ -50,10 +50,17 @@ void mostrar_uno(Dpersonales);
 
 int main(void){
     datos persona;
-    int n;
+    int n,r;
     genera_vector(persona, &n);
     mostrar_vector(persona,n);
-
+	if(r=strcmp(persona->apeynom,persona->apeynom)<-1){
+		mostrar_uno(persona[1]);
+		mostrar_uno(persona[2]);
+	}
+	else {
+		mostrar_uno(persona[2]);
+		mostrar_uno(persona[1]);
+	}
     return 0;
 }
 

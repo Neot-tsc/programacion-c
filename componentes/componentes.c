@@ -319,6 +319,18 @@ void ordenamiento_seleccion_directa(Tlista lista, int n){
 	
 };
 
+void ordena_secuencial(Tlista a, int n){
+	int i,j,aux;
+	for(i=1; i<n; i++){
+		for(j=i+1; j<=n; j++){
+			if(a[j]<a[i]){
+				aux=a[j];
+				a[j]=a[i];
+				a[i]=aux;
+			}
+		}
+	}
+}
 
 
 	
@@ -498,7 +510,7 @@ int main(void){
 
 //cargar uno 
 
-Dpersonales agregar_uno(){
+Dpersonales retorna_uno(){
 	Dpersonales aux;
     printf("ingrese nombre:");
 	fflush(stdin);
@@ -557,5 +569,8 @@ void mostrar_vector(datos datos, int n){
         mostrar_uno(datos[i]);
     }
 }
+
+//cargar lista ordenada en vectores de tad sin repetidos
+
 
 

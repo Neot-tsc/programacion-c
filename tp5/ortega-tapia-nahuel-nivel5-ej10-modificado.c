@@ -79,6 +79,7 @@ void leecad(Tcad cad){
 Tdatos ingresa_uno(){
 	Tdatos aux;
 	printf("\ningrese el nombre del circulo: ");
+	fflush(stdin);
 	leecad(aux.nombre);
 	printf("\ningrese el punto (x,y):");
 	scanf("%f",&aux.coordenada.x);

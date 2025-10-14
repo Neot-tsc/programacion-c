@@ -574,3 +574,42 @@ void mostrar_vector(datos datos, int n){
 
 
 
+	void baraja(Tlista a, int *n){
+	int i,j,ban=1;
+	i=0;
+	do{
+		i++;
+		a[i]=nuevo();
+		if(a[i]!=0){/*distinto a la salida para finalizar la entrada*/
+			if(esta(a,i,a[i])){//verifica si existe o no para ingresar
+				a[0]=a[i];
+				j=i-1;
+				while(a[0]<a[j]){
+					a[j+1]=a[j];
+					j--;
+				}
+				a[j+1]=a[0];
+			}
+			else
+				i--;//si el valor es repetido disminuye el 
+			//tamanio para semtener la depuracion
+		}
+		else 
+		   ban=0;
+	}while(ban==1);
+	*n=i-1;
+}	
+//esta funcion solo funciona con la baraja de arriba,
+//evalua que no aya repetido en el vector
+int esta(Tlista a, int n, int nuevo){
+	int r=1;
+	int i=1, ban=1;
+	while(i<n && ban==1){
+		if(a[i]== nuevo){
+			ban=0;
+			r=0;
+		}
+		i++;
+	}
+	return r;
+}

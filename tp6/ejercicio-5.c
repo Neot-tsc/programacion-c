@@ -30,17 +30,23 @@ typedef struct{
 }tad;
 
 typedef tad datos[max];
+
+
+
 tad retorna_uno();
-void cargar_lista(datos, int*);
-void ing_baraja_notam(datos, int*);
-int confirmar(datos, int, long int );
-
-
-
+void ingreso(datos ,int*);
+void mostrar_uno(tad);
+void mostrar_todo(datos, int);
+void leecad(tcad);
+void depurar(datos, int*);
 
 //inicio del main
 int main(void) {
 	datos persona;	
+	int n;
+	ingreso(persona,&n);
+	depurar(persona,&n);
+	mostrar_todo(persona, n);
 	return 0;
 }
 
@@ -63,65 +69,91 @@ tad retorna_uno(){
 	printf("\nfecha de nacimiento:\n");
 	printf("\ndia:");
 	scanf("%ld",&aux.fecha.dia);
-	printf("\nmes:");
+	printf("mes:");
 	scanf("%ld",&aux.fecha.mes);
-	printf("\nanio:");
+	printf("anio:");
 	scanf("%ld",&aux.fecha.anio);
 	return aux;
 }
 
-void cargar_lista(datos persona, int*n){
-	int i,j,op;
+
+
+void mostrar_uno(tad datos){
+	printf("\napellido y nombre: %s %s",datos.apellido,datos.nombre);
+	printf("\nnum de celular: %ld", datos.celular);
+	printf("\ndireccion: %s", datos.direccion);
+	printf("\nfecha de nacimiento: %d/%d/%d",datos.fecha.dia,datos.fecha.mes, datos.fecha.anio);
+}
+
+void mostrar_todo(datos persona, int n){
+	int i;
+	for(i=1; i<=n; i++){
+		printf("\n\ndatos de contacto %d\n\n",i);
+		mostrar_uno(persona[i]);
+	}
+}
+
+void leecad(tcad cad){
+	int i;
+	char c;
+	i=0;
+	c=getchar();
+	while(c!=EOF && c!='\n' && i<max-1){
+		cad[i]=c;
+		i++;
+		c=getchar();
+
+	}
+	cad[i]='\0';
+	while(c!=EOF && c!='\n')
+		c=getchar();
+}
+
+void ingreso(datos persona,int*n){
+	int op,j;
+	*n=0;
 	do
 	{
-		printf("\n1) ingresar nuevo usuario.");
-		printf("\n0) terminar ingreso.");
+		printf("\n[1] ingresar datos.");
+		printf("\n[0] terminar ingreso.");
+		printf("\nseleccione una opcion:");
 		scanf("%d",&op);
 		switch (op)
 		{
 			case 1:
 				(*n)++;
-				persona[0]=retorna_uno();
-				break;
+				persona[*n]=retorna_uno();
+				persona[0]=persona[*n];
+				j=(*n)-1;
+				while (strcmp(persona[0].apellido,persona[j].apellido)<0)
+				{
+					persona[j+1]=persona[j];
+					j--;
+				}
+				persona[j+1]=persona[0];	
+			break;
 			case 0:
-				printf("\ningreso completado");
-				break;
+				printf("ingreso terminado.");
+			break;
 			default:
-				printf("\ningrese una opcion valida");
-				break;
+				printf("\ningrese un opccion valida.");
 		}
 	} while (op!=0);
 	
 }
 
-
-void ing_baraja_notam(datos persona, int* n){
-	int i,j,ban;
-	i=0;
-	ban=1;
-	do
-	{
-		i++;
-		persona[i]=retorna_uno();
-		if(persona[i].celular!=0){
-			if()
+void depurar(datos persona, int*n){
+	int i,j;
+	if(*n>1){
+		j=2;
+		for (i=1; i <=*n; i++)
+		{
+			if(persona[i].celular != persona[j].celular)
+			j++;
+			else 
+				if(i!=j)
+				persona[j]=persona[i];
 		}
-
-	} while (ban==1);
-	
-}
-
-int confirmar(datos persona, int n, long int nuevo ){
-	int r,i,ban;
-	r=1;
-	i=1;
-	ban=1;
-	while(i<n && ban==1){
-		if(persona[i].celular == nuevo){
-			ban=0;
-			r=0;
-		}
-		i++;
 	}
-    return r;
+	*n=j;
 }

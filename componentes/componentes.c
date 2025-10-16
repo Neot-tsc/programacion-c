@@ -68,7 +68,7 @@ void insertar_un_elemento_al_final(Tlista, int* );
 void insertar_un_elemento(Tlista, int*, int, int);
 
 /*#############################################################*/
-void eliminar_un_elemento(Tlista,int*);
+void eliminar_un_elemento(Tlista,int*,int);
 
 /*#############################################################*/
 /*de un vector*/
@@ -612,4 +612,18 @@ int esta(Tlista a, int n, int nuevo){
 		i++;
 	}
 	return r;
+}
+
+void eliminar_un_elemento(Tlista a,int* n, int pos){
+	int i;
+	for(i=pos; i<*n; i++)
+		a[i]=a[i+1];
+	(*n)--;
+}
+void insertar_un_elemento(Tlista a, int* n, int pos, int nuevo){
+	int i;
+	for(i=*n; i<=pos; i--)
+		a[i+1]=a[i];
+	a[pos]=nuevo;
+	(*n)++;
 }

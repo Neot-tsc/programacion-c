@@ -422,12 +422,12 @@ int busqueda_binaria(Tlista a, int n, int buscado){
 	
 int busqueda_secuencial(Tlista a, int n, int buscado){
 	int i,pos;
+	pos=0;
 	i=1;
 	while(i<=n && a[i]!= buscado)
 		i++;
 	if(i<n)
 		pos=i;
-	else pos=0;
 	return pos;
 }
 

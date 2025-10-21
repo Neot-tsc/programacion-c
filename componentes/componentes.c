@@ -627,3 +627,12 @@ void insertar_un_elemento(Tlista a, int* n, int pos, int nuevo){
 	a[pos]=nuevo;
 	(*n)++;
 }
+
+
+
+
+/*TAD (TIPO ABSTRACTO DE DATO)*/
+
+
+
+

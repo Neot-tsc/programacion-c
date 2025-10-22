@@ -44,4 +44,13 @@ void mostrar_cuenta_dni(Tcuenta a){
 	printf("\nsaldo disponible: %f", a.saldo);
 }
 
- 
+int busqueda_secuencial(vect a, int n, int buscado){
+	int i,pos;
+	pos=0;
+	i=1;
+	while(i<=n && a[i].numero!= buscado)
+		i++;
+	if(i<n)
+		pos=i;
+	return pos;
+}

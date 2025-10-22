@@ -22,16 +22,40 @@ typedef struct
     int curso;
 }tdd;
 
+//funciones y procedimientos
+
+
 typedef tdd datos[max];
 tdd carga_uno();
 void cargar_lista(datos, int*);
 void leecad(Tcad);
+void ordenamiento_burbuja(datos, int);
+int menu();
+//main 
 
 
 int main(void){
     datos alumno;
-    int n;
-
+    int n,folk,esp,cont,op;
+    folk=0; esp=0; cont=0;
+    cargar_lista(alumno, &n);
+    ordenamiento_burbuja(alumno, n);
+    do
+    {
+        op=menu();
+        switch (op){
+            case 1:
+                if(n<max){
+                    n++;
+                    alumno[n]=carga_uno();
+                    ordenamiento_burbuja(alumno, n);
+                }
+                else
+                    printf("\nlista llena.");
+                break;
+        }
+    } while (op!=0);
+    
     return 0;
 }
 
@@ -66,5 +90,48 @@ void leecad(Tcad cad){
 
 void cargar_lista(datos persona, int *n){
     *n=0;
-    
+    int op;
+    do
+    {
+        printf("\nDesea cargar un alumno? (1=si/0=no):");
+        scanf("%d", &op);
+        if(op==1 && *n<max){
+            (*n)++;
+            persona[*n]=carga_uno();
+        }
+        else
+            if(*n>=max)
+                printf("\nlista llena.");
+            else
+                
+            printf("\ningrese una opcion valida.");
+    } while (op!=0);
+    printf("\ncarga finalizada.");
+}
+
+void ordenamiento_burbuja(datos a, int n){
+    int i,j;
+    tdd aux;
+    for (i=1; i < n; i++)
+    {
+        for(j=n; j>i; j--){
+            if(a[j].dni < a[j-1].dni){
+                aux=a[j];
+                a[j]=a[j-1];
+                a[j-1]=aux;
+            }
+        }
+    }
+}
+int menu(){
+    int op;
+    printf("\n------Menu------\n");
+    printf("\n1) Agregar un alumno a la lista.");   
+    printf("\n2) suscribir un alumno.");
+    printf("\n3) dar de baja de un curso.");  
+    printf("\n4) seliminar los alumnos no inscripctos.");
+    printf("\n0) salir."); 
+    printf("\ningrese una opcion: ");
+    scanf("%d",&op);
+    return op;
 }

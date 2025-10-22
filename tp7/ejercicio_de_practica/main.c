@@ -4,9 +4,9 @@
 
 
 
-typedef Tcuenta vect[10];
+
 int menu();
-int busqueda_secuencial(vect , int, int);
+
 
 int main(void){
 	vect a;
@@ -67,13 +67,4 @@ int menu(){
 	return op;
 }
 
-int busqueda_secuencial(vect a, int n, int buscado){
-	int i,pos;
-	pos=0;
-	i=1;
-	while(i<=n && a[i].numero!= buscado)
-		i++;
-	if(i<n)
-		pos=i;
-	return pos;
-}
+

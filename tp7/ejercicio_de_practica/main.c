@@ -1,22 +1,16 @@
 #include <stdio.h>
 #include "Tad_cuenta.h"
-
-
-
+#include "TAD_LISTA_CUENTAS_H"
 
 
 int menu();
 
 
 int main(void){
-	vect a;
-	int n=3, pos;
-	float nuevo;
-	int op;
-	a[1]=cargar_cuenta();
-	a[2]=cargar_cuenta();
-	a[3]=cargar_cuenta();
-	int buscado;
+	tlista a;
+	a=cargar_lista;
+	mostrar_lista(a);
+	/*int buscado;
 	do
 	{
 		op=menu();
@@ -26,7 +20,7 @@ int main(void){
 			printf("\ningrese el numero de cuenta a mostrar:");
 			scanf("%d", &buscado);
 			pos=busqueda_secuencial(a,n,buscado);
-			mostrar_cuenta(a[pos]);
+			mostrar_uno(a[pos]);
 			break;
 		case 2:
 			printf("\ningrese el numero de la cuenta:");
@@ -43,6 +37,9 @@ int main(void){
 			printf("\ningrese el saldo a retirar:");
 			scanf("%f", &nuevo);
 			modifica_saldo_resta(&a[pos], nuevo);
+			break;
+		case 4:
+			mostrar_todo(a,n);
 			break;
 		case 0:
 			printf("\nsaliendo del prgrama");
@@ -61,10 +58,12 @@ int menu(){
 	printf("\n1) mostrar cuenta.");
 	printf("\n2) agregar saldo.");
 	printf("\n3) restar saldo.");
+	printf("\n4) mostrar la lista completa.");
 	printf("\n0) salir.");
 	printf("\nseleccione una opcion: ");
 	scanf("%d",&op);
 	return op;
 }
+	*/
 
 

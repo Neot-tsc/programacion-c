@@ -1,5 +1,7 @@
 #include "TAD_CUENTAS_H"
 
+
+
 tcuenta cargar(){
 	tcuenta aux;
 	printf("\ningrese el numero de cuenta:");
@@ -15,4 +17,4 @@ void mostrar_cuenta(tcuent a){
 	printf("\nsaldo disponible: %f", a.saldo);
 }
 	
-void cargar
+

@@ -1,6 +1,6 @@
 #ifndef TAD_LISTA_CUENTAS_H
 #define TAD_LISTA_CUENTAS_H
-#include "TAD_CUENTAS_H" 
+#include "TAD_CUENTAS_H"
 #define max 50
 
 typedef tcuenta vector[max];

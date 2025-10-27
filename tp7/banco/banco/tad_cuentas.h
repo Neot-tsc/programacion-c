@@ -1,6 +1,6 @@
 #ifndef TAD_CUENTAS_H
 #define TAD_CUENTAS_H
-#include <stdlib.h>
+#include <stdio.h>
 
 typedef struct{
 	long int dni;

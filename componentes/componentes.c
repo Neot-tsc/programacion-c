@@ -405,7 +405,7 @@ void insertar_baraja_tama�o_desconocido(Tlista a, int *n){
 
 int busqueda_binaria(Tlista a, int n, int buscado){
 	int ini, fin, med, r;
-	ini=1;fin=n;med=(ini+fin)/2;
+	ini=1;fin=n;med=(ini+fin)/2;r=0;
 	while(ini<=fin && a[med]!=buscado){
 		if(a[med]<buscado)
 			ini=med++;
@@ -415,8 +415,6 @@ int busqueda_binaria(Tlista a, int n, int buscado){
 	}
 	if(ini<=fin)
 		r=med;
-	else
-		r=0;
 	return r;
 }
 	

@@ -634,3 +634,65 @@ void insertar_un_elemento(Tlista a, int* n, int pos, int nuevo){
 
 
 
+
+
+
+/*############################################################################*/
+
+//recursividad
+
+
+int factorial(int n){
+	if(n>0)
+		return n*factorial(n-1);
+	else 
+		return 1;
+}
+
+//mostrar los digitos de derecha a izquierda
+
+
+void mostrar_der_iz(int n){ // recursivo
+	int dig;
+	if(n>0){
+		dig=n%10;
+		printf("%d", dig);
+		mostrar_der_iz(n/10);
+	}
+}
+
+void mostrar_iz_der(int n){
+	int dig;
+	if(n>0){
+		mostrar_iz_der(n/10);
+		dig=n%10;
+		printf("%d", dig);
+	}
+}
+	
+
+int contar_dig(int n){
+	if(n>0){
+		return 1+contar_dig(n/10);
+	}
+	return 0;
+}
+
+int suma(int n){
+	int d;
+	if(n>0){
+		d=n%10;
+		return d+suma(n/10);
+	}
+	return 0;
+}
+
+void divisores(int n, int i){
+	if(i<n){
+		if(n/i==0){
+			i++;
+			divisores(n,i);
+			printf("%d", i);
+		}
+	}
+}

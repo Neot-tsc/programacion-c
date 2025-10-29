@@ -23,7 +23,7 @@ cursor=24:0
 open=true
 [source]
 path=tad_registro.c
-cursor=62:14
+cursor=76:0
 open=true
 [source]
 path=main.c
@@ -31,7 +31,7 @@ cursor=15:8
 open=true
 [source]
 path=tad_lista.c
-cursor=64:15
+cursor=105:25
 open=true
 [header]
 path=tad_cadena.h
@@ -39,11 +39,11 @@ cursor=8:0
 open=true
 [header]
 path=tad_registro.h
-cursor=13:43
+cursor=23:0
 open=true
 [header]
 path=tad_lista.h
-cursor=18:0
+cursor=20:0
 open=true
 [config]
 name=Debug

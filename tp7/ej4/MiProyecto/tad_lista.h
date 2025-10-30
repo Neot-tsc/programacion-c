@@ -17,8 +17,8 @@ tlista cargar_lista();
 void mostrar_lista(tlista);
 void agregar(tlista*);
 void eliminar(tlista*);
-
-
+void mostrar_por_proveedor(tlista);
+void mostrar_por_stok_minimo(tlista);
 
 
 

@@ -620,7 +620,7 @@ void eliminar_un_elemento(Tlista a,int* n, int pos){
 }
 void insertar_un_elemento(Tlista a, int* n, int pos, int nuevo){
 	int i;
-	for(i=*n; i<=pos; i--)
+	for(i=*n; i>=pos; i--)
 		a[i+1]=a[i];
 	a[pos]=nuevo;
 	(*n)++;

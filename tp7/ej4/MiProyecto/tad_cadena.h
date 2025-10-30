@@ -8,6 +8,9 @@
 typedef char tcad[max];
 
 void leecad(tcad);
+int compara_cadenas(tcad, tcad);
+int tam_cad(tcad);
+
 
 
 

@@ -11,6 +11,6 @@ typedef struct{
 
 Tarticulo retorna_uno();
 void muestra_uno(Tarticulo);
-
+int compara_articulos(Tarticulo, Tarticulo);
 
 #endif

@@ -1,4 +1,4 @@
-#inlcude "tad_cadena.h"
+#include "tad_cadena.h"
 
 
 void leecad(tcad cad){
@@ -12,6 +12,23 @@ void leecad(tcad cad){
 		c=getchar();
 	}
 	cad[j]='\0';
-	while(c!=EOF && c'\n')
+	while(c!=EOF && c!='\n')
 		c=getchar();
+}
+
+int compara_cadenas(tcad a, tcad b){
+	int r;
+	strcmp(a,b);
+	if(strcmp(a,b)>0)
+		r=1;
+	else if (strcmp(a,b)<0)
+		r=-1;
+	else
+		r=0;
+	return r;
+}
+int tam_cad(tcad a){
+	int cant;
+	cant=strlen(a);
+	return cant;	
 }

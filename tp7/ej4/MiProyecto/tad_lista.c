@@ -60,7 +60,7 @@ void eliminar(tlista *a){
 
 void mostrar_por_proveedor(tlista a){
     int i;
-    tcad buscar;
+    tcad buscar,proveedor;
     printf("\ningrese el nombre del proveedor a buscar:");
     fflush(stdin);
     leecad(buscar);
@@ -69,7 +69,8 @@ void mostrar_por_proveedor(tlista a){
     else {   
         printf("\narticulos del proveedor %s:", buscar);
         for(i=1; i<=a.tam; i++){
-            if(compara_cadenas(a.vect[i].proveedor, buscar)==0){
+			proveedor=retorna_proveedor(a.vect[i]);
+            if(compara_cadenas(proveedor, buscar)==0){
                 muestra_uno(a.vect[i]);
             }
         }
@@ -77,7 +78,7 @@ void mostrar_por_proveedor(tlista a){
 }
 
 void mostrar_por_stok_minimo(tlista a){
-    int i,maximo;
+    int i,maximo,stok;
     printf("\ningrese el stok maximo a buscar (se mostraran los menores e iguales al maximo):");
     scanf("%d", &maximo);
     if(busqueda_stok(a.vect, a.tam, maximo)==0)
@@ -86,7 +87,8 @@ void mostrar_por_stok_minimo(tlista a){
     {
         printf("\narticulos con stok menor a %d:", maximo);
         for(i=1; i<=a.tam; i++){
-            if(a.vect[i].stok<=maximo)
+			stok=retorna_stok(a.vect[i])
+            if(stok<=maximo)
                 muestra_uno(a.vect[i]);
         }
     }

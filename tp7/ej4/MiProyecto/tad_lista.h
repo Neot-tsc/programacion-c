@@ -21,5 +21,4 @@ void mostrar_por_proveedor(tlista);
 void mostrar_por_stok_minimo(tlista);
 
 
-
 #endif

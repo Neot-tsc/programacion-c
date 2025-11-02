@@ -1,4 +1,4 @@
-#include "tad_lista.h"
+    #include "tad_lista.h"
 
 void genera_lista(articulos, int);
 int busqueda_binaria(articulos, int, int);

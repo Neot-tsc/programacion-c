@@ -18,7 +18,6 @@ void leecad(tcad cad){
 
 int compara_cadenas(tcad a, tcad b){
 	int r;
-	strcmp(a,b);
 	if(strcmp(a,b)>0)
 		r=1;
 	else if (strcmp(a,b)<0)

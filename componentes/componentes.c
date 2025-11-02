@@ -696,3 +696,295 @@ void divisores(int n, int i){
 		}
 	}
 }
+
+//busqueda binaria recursiva
+//ya se pasan los parametros ini y fin antes de llamar a la funcion
+
+int busqueda_binaria_recursiva(Tlista a, int ini, int fin, int buscado){
+	int med, r;
+	med=(ini+fin)/2;
+	if(ini<=fin){
+		if(a[med]==buscado)
+			return med;
+			else {
+				if(a[med]<buscado)
+					return busqueda_binaria_recursiva(a, med+1, fin, buscado);
+				else 
+					return busqueda_binaria_recursiva(a, ini, med-1, buscado);
+			}
+	}
+}
+
+//quick sort
+//metdo de ordenamiento en base a sub listas generadas por un pivote
+
+void quick_sort(Tlista a, int ini, int fin){
+	int izq, der, piv,med;
+	if(ini<fin){
+		piv=a[ini];
+		izq=ini;
+		der=fin;
+		while(izq<der){
+			while(der<izq && a[der]>piv)
+				der--;
+			if(der>izq){
+				a[izq]=a[der];
+				izq++;
+			}
+			while(izq<der && a[izq]<piv)
+				izq++;
+			if(izq<der){
+				a[der]=a[izq];
+				der--;
+			}
+		}
+		a[der]=piv;
+		med=der;
+		quick_sort(a, ini, med-1);
+		quick_sort(a, med+1, fin);
+	}
+}
+
+
+//M-sort recursivo
+//marge sort
+//consta de dos partes este metodo de ordenamiento
+
+void marge(Tlista a, int ini, int med, int fin){
+	Tlista aux;
+	int i,j,k,t;
+	k=0;
+	i=ini;
+	j=med+1;
+	while(i<=med && j<=fin){
+		k++;
+		if(a[i]<a[j]){
+			aux[k]=a[i];
+			i++;
+		}
+		else{
+			aux[k]=a[j];
+		}j++;
+	}
+	for(t=i; t<=med; t++){
+		k++;
+		aux[k]=a[t];
+	}
+	for(t=j; t<=fin; t++){
+		k++;
+		aux[k]=a[t];
+	}
+	for(t=1; t<=k; t++)
+		a[ini+t-1]=aux[t];
+}
+
+void m_sort(Tlista a, int ini, int fin){
+	int med;
+	if(ini<fin){
+		med=(ini+fin)/2;
+		m_sort(a, ini, med);
+		m_sort(a, med+1, fin);
+		marge(a, ini, med, fin);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void marge(Tlista a, int ini, int fin, Tlista aux){
+	int i,j,k,med;
+	med=(ini+fin)/2;
+	i=ini;
+	j=med+1;
+	k=ini;
+	while(i<=med && j<=fin){
+		if(a[i]<a[j]){
+			aux[k]=a[i];
+			i++;
+		}
+		else{
+			aux[k]=a[j];
+			j++;
+		}
+		k++;
+	}
+	while(i<=med){
+		aux[k]=a[i];
+		i++;
+		k++;
+	}
+	while(j<=fin){
+		aux[k]=a[j];
+		j++;
+		k++;
+	}
+	for(i=ini; i<=fin; i++)
+		a[i]=aux[i];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void quick_sort(Tlista a, int izq, int der){
+	int i, j, pivote, aux;
+	i=izq;
+	j=der;
+	pivote=a[(izq+der)/2];
+	do{
+		while(a[i]<pivote)
+			i++;
+		while(a[j]>pivote)
+			j--;
+		if(i<=j){
+			aux=a[i];
+			a[i]=a[j];
+			a[j]=aux;
+			i++;
+			j--;
+		}
+	}while(i<=j);
+	if(izq<j)
+		quick_sort(a, izq, j);
+	if(i<der)
+		quick_sort(a, i, der);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/*############################################################################*/
+
+//pilas y colas
+//pilas
+#define maxPila 50
+typedef int TPila[maxPila];
+typedef int tope;
+void inicializar_pila(tope *t){
+	*t=0;
+}
+int pila_vacia(tope t){
+	return t==0;
+}
+int pila_llena(tope t){
+	return t==maxPila;
+}
+void push(TPila p, tope *t, int elem){
+	if(!pila_llena(*t)){
+		(*t)++;
+		p[*t]=elem;
+	}
+	else 
+		printf("\npila llena");
+}
+int pop(TPila p, tope *t){
+	int elem=-1;
+	if(!pila_vacia(*t)){
+		elem=p[*t];
+		(*t)--;
+	}
+	else 
+		printf("\npila vacia");
+	return elem;
+}
+int ver_tope(TPila p, tope t){
+	int elem=-1;
+	if(!pila_vacia(t)){
+		elem=p[t];
+	}
+	else 
+		printf("\npila vacia");
+	return elem;
+}
+//colas
+#define maxCola 50
+typedef int TCola[maxCola];
+typedef struct{
+	int frente;
+	int final;
+}TInfoCola;
+void inicializar_cola(TInfoCola *c){
+	c->frente=0;
+	c->final=0;
+}
+int cola_vacia(TInfoCola c){
+	return c.frente==c.final;
+}
+int cola_llena(TInfoCola c){
+	return c.final==maxCola-1;
+}
+void encolar(TCola q, TInfoCola *c, int elem){
+	if(!cola_llena(*c)){
+		c->final++;
+		q[c->final]=elem;
+	}
+	else 
+		printf("\ncola llena");
+}
+int desencolar(TCola q, TInfoCola *c){
+	int elem=-1;
+	if(!cola_vacia(*c)){
+		c->frente++;
+		elem=q[c->frente];
+	}
+	else 
+		printf("\ncola vacia");
+	return elem;
+}
+int ver_frente(TCola q, TInfoCola c){
+	int elem=-1;
+	if(!cola_vacia(c)){
+		elem=q[c.frente+1];
+	}
+	else 
+		printf("\ncola vacia");
+	return elem;
+}
+/*############################################################################*/

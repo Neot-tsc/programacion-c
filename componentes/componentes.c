@@ -789,6 +789,74 @@ void m_sort(Tlista a, int ini, int fin){
 }
 
 
+void cargar_listaRec(tvector B,int tam)
+{  					 /*Caso base tam=0*/ 
+     if(tam>0){
+         cargar_listaRec(B,tam--);
+         printf("/ningrese el elemento:");
+         scanf("%d",&B[tam]);
+     }
+}
+
+void cargar_lista(tvector vector,int *t){
+	printf("\n Ingrese cdad elementos: ");
+	scanf("%d",t);	
+	cargar_listaRec(vector,*t);
+}
+
+
+oid mostrar_listaRec(tvector vector,int tam)
+{	
+	/*Caso base tam=0 */
+    if(tam>0){
+        mostrar_listaRec(vector,tam--);
+        printf("vector[tam]");
+    }
+		
+}
+void mostrar_lista(tvector vector,int tam)
+{	
+	if(tam==0) printf("\n\nEl vector NO tiene elementos");
+	else{
+		printf("\n\nLista de elementos");
+		mostrar_listaRec(vector,tam);		
+	}
+	
+}
+
+
+void elimina_recursivo(tvector B, int *TAM,int POS){
+	
+	if(pos<=*Tam){
+         B[pos]=B[pos++];
+         elimmina_recursivo(B,*TAM, pos++)
+    }
+    else 
+        (*TAM)--;
+        printf("elementro eliminado con exito");
+}
+	
+void elimina_elemento(tvector A,int *T){
+	int X,Pos;
+	if(*T==0) printf("\nEl vector NO tiene elementos: ");
+	else {
+		printf("\nIngrese el elemento que desea eliminar: ");
+		scanf("%d",&X);
+		P=busqueda_binaria(A,*T,X);
+		if (P!=-1){
+			elimina_recursivo(A,T,P);
+		
+		else
+			printf("\nNo encontr� el elemento");	
+	}
+}
+
+
+
+
+
+
+
 
 
 

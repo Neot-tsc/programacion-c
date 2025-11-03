@@ -852,6 +852,25 @@ void elimina_elemento(tvector A,int *T){
 }
 
 
+void menu_recursivo(tvector l,int *n){
+	int rta;
+	rta=opciones();
+	switch(rta){
+	case 0: printf("\nA elegido Salir del Programa"); 
+	break;
+	case 1:  
+		    mostrar_lista(l,n);
+			menu_recursivo(l, n); 
+            	break;
+	case 2: 
+			 elimina_elemento(l ,n); 
+             menu_recursivo(l,n);
+			 break;	
+	default: printf("\nA ingresado un valor no valido");
+			menu_recursivo(l, n);  break;
+	}
+}	
+
 
 
 

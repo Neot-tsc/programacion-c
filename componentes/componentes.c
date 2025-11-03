@@ -880,6 +880,26 @@ long fibo(int n){
 }
 
 
+// Versión recursiva de leecad
+
+void leecadRecAux(Tcad cadena, int j) {
+    char c = getchar();
+    if (c != EOF && c != '\n' && j < max - 1) {
+        cadena[j] = c;
+        leecadRecAux(cadena, j + 1);
+    } else {
+        cadena[j] = '\0';
+        // Consumir los caracteres restantes (opcional, copia el comportamiento original)
+        while (c != EOF && c != '\n')
+            c = getchar();
+    }
+}
+
+void leecad(Tcad cadena) {
+    leecadRecAux(cadena, 0);
+}
+
+
 
 
 

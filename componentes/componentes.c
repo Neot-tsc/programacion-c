@@ -643,10 +643,10 @@ void insertar_un_elemento(Tlista a, int* n, int pos, int nuevo){
 
 
 int factorial(int n){
-	if(n>0)
-		return n*factorial(n-1);
-	else 
-		return 1;
+    if(n==0)
+        return 1;
+    else 
+        return n*factorial(n-1);
 }
 
 //mostrar los digitos de derecha a izquierda
@@ -697,21 +697,43 @@ void divisores(int n, int i){
 	}
 }
 
+int fibonacci(int n){
+	if(n==1 || n==2)
+		return 1;
+	else 
+		return fibonacci(n-1)+fibonacci(n-2);
+}
+
+
 //busqueda binaria recursiva
 //ya se pasan los parametros ini y fin antes de llamar a la funcion
 
 int busqueda_binaria_recursiva(Tlista a, int ini, int fin, int buscado){
-	int med, r;
+	int med;
 	med=(ini+fin)/2;
-	if(ini<=fin){
+	if(ini>fin)
+		return 0;
+	else{
 		if(a[med]==buscado)
 			return med;
-			else {
-				if(a[med]<buscado)
-					return busqueda_binaria_recursiva(a, med+1, fin, buscado);
-				else 
-					return busqueda_binaria_recursiva(a, ini, med-1, buscado);
-			}
+		else {
+			if(a[med]<buscado)
+				return busqueda_binaria_recursiva(a, med+1, fin, buscado);
+			else 
+				return busqueda_binaria_recursiva(a, ini, med-1, buscado);
+		}
+	}
+}
+
+//busqueda secuancual recursiva
+int busqueda_secuencial_recursiva (Tlista a, int n, int buscado){
+	if(n==0)
+		return 0;
+	else{
+		if(a[n]==buscado)
+			return n;
+		else 
+			return busqueda_secuencial_recursiva(a, n-1, buscado);
 	}
 }
 
@@ -789,7 +811,7 @@ void m_sort(Tlista a, int ini, int fin){
 }
 
 
-void cargar_listaRec(tvector B,int tam)
+void cargar_listaRec(Tlista B,int tam)
 {  					 /*Caso base tam=0*/ 
      if(tam>0){
          cargar_listaRec(B,tam--);
@@ -798,14 +820,14 @@ void cargar_listaRec(tvector B,int tam)
      }
 }
 
-void cargar_lista(tvector vector,int *t){
+void cargar_lista(Tlista vector,int *t){
 	printf("\n Ingrese cdad elementos: ");
 	scanf("%d",t);	
 	cargar_listaRec(vector,*t);
 }
 
 
-oid mostrar_listaRec(tvector vector,int tam)
+void mostrar_listaRec(Tlista vector,int tam)
 {	
 	/*Caso base tam=0 */
     if(tam>0){
@@ -814,7 +836,7 @@ oid mostrar_listaRec(tvector vector,int tam)
     }
 		
 }
-void mostrar_lista(tvector vector,int tam)
+void mostrar_lista(Tlista vector,int tam)
 {	
 	if(tam==0) printf("\n\nEl vector NO tiene elementos");
 	else{
@@ -825,51 +847,61 @@ void mostrar_lista(tvector vector,int tam)
 }
 
 
-void elimina_recursivo(tvector B, int *TAM,int POS){
+void elimina_recursivo(Tlista B, int *Tam,int pos){
 	
 	if(pos<=*Tam){
          B[pos]=B[pos++];
-         elimmina_recursivo(B,*TAM, pos++)
+         elimmina_recursivo(B,*Tam, pos++);
     }
     else 
-        (*TAM)--;
+        (*Tam)--;
         printf("elementro eliminado con exito");
 }
 	
-void elimina_elemento(tvector A,int *T){
+void elimina_elemento(Tlista A,int *T){
 	int X,Pos;
 	if(*T==0) printf("\nEl vector NO tiene elementos: ");
 	else {
 		printf("\nIngrese el elemento que desea eliminar: ");
 		scanf("%d",&X);
-		P=busqueda_binaria(A,*T,X);
-		if (P!=-1){
-			elimina_recursivo(A,T,P);
-		
+		Pos=busqueda_binaria(A,*T,X);
+		if (Pos!=-1)
+			elimina_recursivo(A,T,Pos);
 		else
 			printf("\nNo encontr� el elemento");	
 	}
 }
 
 
-void menu_recursivo(tvector l,int *n){
-	int rta;
-	rta=opciones();
-	switch(rta){
-	case 0: printf("\nA elegido Salir del Programa"); 
+void menu_recursivo(Tlista a,int *n){
+	int op;
+	op=opciones();
+	switch(op){
+	case 0: printf("\nfinalzando el programa"); 
 	break;
 	case 1:  
-		    mostrar_lista(l,n);
-			menu_recursivo(l, n); 
+		    mostrar_lista(a,n);
+			menu_recursivo(a, n); 
             	break;
 	case 2: 
-			 elimina_elemento(l ,n); 
-             menu_recursivo(l,n);
+			 elimina_elemento(a ,n); 
+             menu_recursivo(a,n);
 			 break;	
-	default: printf("\nA ingresado un valor no valido");
-			menu_recursivo(l, n);  break;
+	default: printf("\nopcion no valida, ingrese otra vez.");
+			menu_recursivo(a, n);  break;
 	}
 }	
+
+int opciones(){
+	int op;
+	printf("\n\n***MENU DE OPCIONES***");
+	printf("\n1. Mostrar Lista");
+	printf("\n2. Eliminar Elemento");
+	printf("\n0. Salir del Programa");
+	printf("\nIngrese su opcion: ");
+	scanf("%d",&op);
+	return op;
+}
 
 
 long fibo(int n){ 
@@ -880,6 +912,20 @@ long fibo(int n){
 }
 
 
+int aleatorio(int min, int maxx){
+	int num;
+	num=rand()%(maxx-min+1)+min;
+	return num;
+}
+
+
+void cargar_listaRec(Tlista a, int n){
+	if(n>0){
+		cargar_listaRec(a, n-1);
+		a[n-1]=aleatorio(1,100);
+	}
+
+}
 // Versión recursiva de leecad
 
 void leecadRecAux(Tcad cadena, int j) {

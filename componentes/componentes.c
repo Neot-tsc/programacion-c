@@ -447,17 +447,31 @@ void leecad(Tcad cadena){/*no ingreso tamaio maximo or que es una variable globa
 
 
 
-void agrega_uno(Tlista a, int *n, int nuevo){
-	int i;
-	i=*n;
-	a[0]=nuevo;
-	while(a[i]>nuevo){
-		a[i+1]=a[i];
-		i--;
-	}
-	a[i+1]=nuevo;
-	(*n)++;
+
+void agrega_uno_rec(Tlista a, int pos, int nuevo) {
+
+    if (pos <= 0 || a[pos] <= nuevo) {
+        a[pos + 1] = nuevo;
+        return;
+    }
+    a[pos+1] = a[pos];
+    agrega_uno_rec(a, pos-1, nuevo);
 }
+
+/* Wrapper que verifica límites y llama a la función recursiva */
+void agrega_uno(Tlista a, int *n, int nuevo) {
+    if (*n >= max) {
+        printf("\nLista llena");
+        return;
+    }
+    a[0] = nuevo;
+    agrega_uno_rec(a, *n, nuevo);
+    (*n)++;
+}
+
+
+
+
 // tamanio de cadena contando el espacio 0
  int t;
  int tam_cad(Tcad);
@@ -814,7 +828,7 @@ void m_sort(Tlista a, int ini, int fin){
 void cargar_listaRec(Tlista B,int tam)
 {  					 /*Caso base tam=0*/ 
      if(tam>0){
-         cargar_listaRec(B,tam--);
+         cargar_listaRec(B,tam-1);
          printf("/ningrese el elemento:");
          scanf("%d",&B[tam]);
      }
@@ -831,7 +845,7 @@ void mostrar_listaRec(Tlista vector,int tam)
 {	
 	/*Caso base tam=0 */
     if(tam>0){
-        mostrar_listaRec(vector,tam--);
+        mostrar_listaRec(vector,tam-1);
         printf("vector[tam]");
     }
 		
@@ -850,11 +864,11 @@ void mostrar_lista(Tlista vector,int tam)
 void elimina_recursivo(Tlista B, int *Tam,int pos){
 	
 	if(pos<=*Tam){
-         B[pos]=B[pos++];
-         elimmina_recursivo(B,*Tam, pos++);
+         B[pos]=B[pos+1];
+         elimmina_recursivo(B,*Tam, pos+1);
     }
     else 
-        (*Tam)--;
+        (*Tam)-1;
         printf("elementro eliminado con exito");
 }
 	
@@ -872,6 +886,24 @@ void elimina_elemento(Tlista A,int *T){
 	}
 }
 
+void agrega_uno(Tlista a, int *n){
+	int nuevo, pos;
+	if(*n<max){
+		printf("\ningrese un nuevo elemento:");
+		scanf("%d", &nuevo);
+		agrega_unorec(a,*n, nuevo);
+		(*n)++;
+	}
+
+}
+
+void agrega_unorec(Tlista a,int n, int nuevo){
+	if(a[n]>nuevo && n>0){
+		a[n++]=a[n];
+		agrega_unorec(a,n-1,nuevo);
+	}
+	a[n+1]=nuevo;
+}
 
 void menu_recursivo(Tlista a,int *n){
 	int op;

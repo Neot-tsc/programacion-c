@@ -755,30 +755,26 @@ int busqueda_secuencial_recursiva (Tlista a, int n, int buscado){
 //metdo de ordenamiento en base a sub listas generadas por un pivote
 
 void quick_sort(Tlista a, int ini, int fin){
-	int izq, der, piv,med;
-	if(ini<fin){
-		piv=a[ini];
-		izq=ini;
-		der=fin;
-		while(izq<der){
-			while(der<izq && a[der]>piv)
-				der--;
-			if(der>izq){
-				a[izq]=a[der];
-				izq++;
-			}
-			while(izq<der && a[izq]<piv)
-				izq++;
-			if(izq<der){
-				a[der]=a[izq];
-				der--;
-			}
-		}
-		a[der]=piv;
-		med=der;
-		quick_sort(a, ini, med-1);
-		quick_sort(a, med+1, fin);
-	}
+	int izq,der,piv;
+    if(ini < fin){
+        izq = ini;
+        der = fin;
+        piv = a[ini];
+        
+        while(izq < der){
+            while(izq < der && a[der] >= piv)
+                der--;
+            if(izq < der)
+                a[izq] = a[der];
+            while(izq < der && a[izq] <= piv)
+                izq++;
+            if(izq < der)
+                a[der] = a[izq];
+        }
+        a[izq] = piv;  
+        quick_sort(a, ini, izq-1);
+        quick_sort(a, izq+1, fin);
+    }
 }
 
 

@@ -4,7 +4,7 @@ que permita realizar las siguientes tareas: ordenar ascendentemente utilizando e
 un elemento en la lista (dicho elemento es ingresado por teclado).*/
 
 
-
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
@@ -32,9 +32,10 @@ void menu_rec(lista,int);
 
 int main (void){
     lista a;
-
-
-
+    int n;
+    carga(a,&n);
+    ordenar(a,n);
+    menu_rec(a,n);
     return 0;
 }
 
@@ -42,8 +43,8 @@ int main (void){
 
 void carga(lista a,int *n){
     int ini,fin;
-    printf("\ningrese el tamanio de la lista:");
-    scanf("%d", n);
+	printf("\ningrese el tamanio de la lista:");
+	scanf("%d", n);
     printf("\ningrese el inicio del intervalo:");
     scanf("%d", &ini);
     printf("\ningrese el fin del intervalo:");
@@ -67,9 +68,9 @@ int random(int ini, int fin){
 
 void mostrar(lista a, int n){
     if(n>0){
-        printf("\nelementos de la lista\n");
+		printf("\nelementos de la lista\n");
         mostrar_rec(a,n);
-    }
+	}
     else 
         printf("\nla lista no posee elementos");
 }
@@ -77,7 +78,7 @@ void mostrar(lista a, int n){
 void mostrar_rec(lista a,int n){
     if(n>0){
         mostrar(a,n-1);
-        printf("%d,", a[n]);
+        printf("%d,",a[n]);
     }
 }
 
@@ -87,7 +88,7 @@ void ordenar(lista a, int n){
         printf("\nlista ordenada con exito.");
     }
     else 
-        printf("\nlista vacio, no se puede ordenar.");
+        printf("\nlista vacio");
 }
 
 void q_sort(lista a, int ini, int fin){
@@ -95,20 +96,27 @@ void q_sort(lista a, int ini, int fin){
     if(ini<fin){
         izq=ini;
         der=fin;
-        piv=a[ini];
+        piv=a[ini];  // Elegimos el primer elemento como pivote
+        
         while(izq<der){
+            // Mover der hacia la izquierda hasta encontrar elemento menor que pivote
             while(izq<der && a[der]>=piv)
                 der--;
             if(izq<der)
                 a[izq]=a[der];
+            
+            // Mover izq hacia la derecha hasta encontrar elemento mayor que pivote
             while(izq<der && a[izq]<=piv)
                 izq++;
             if(izq<der)
                 a[der]=a[izq];
         }
+        // Colocar el pivote en su posición final
         a[izq]=piv;
-        q_sort(a,ini,izq-1);
-        q_sort(a,izq-1,fin);
+        
+        // Ordenar las dos mitades
+        q_sort(a,ini,izq-1);     // Subarray izquierdo
+        q_sort(a,izq+1,fin);     // Subarray derecho (corregido: izq+1 en lugar de izq-1)
     }
 }
 

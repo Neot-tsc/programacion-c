@@ -796,7 +796,8 @@ void marge(Tlista a, int ini, int med, int fin){
 		}
 		else{
 			aux[k]=a[j];
-		}j++;
+			j++;
+		}
 	}
 	for(t=i; t<=med; t++){
 		k++;

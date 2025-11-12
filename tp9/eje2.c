@@ -21,34 +21,33 @@ typedef tnodo *tptr;
 
 int random(void);
 tptr retorna_nodo(int);
-void agregar_lista_nodos(tptr*);
-void agregar_pila(tptr*,tptr);
-void agregar_cola(tptr*,tptr*,tptr);
-void mostrar_un_nodo(tnodo);
-void mostrar_lista_nodos(tptr);
+void muestra_lista_nodos(tptr);
+void agregar_pila(tptr *, tptr);
+void enqueue(tptr*,tptr*,tptr);
+void carga_lista_nodos(tptr*,tptr*);
+void liberar(tptr*);
+
 
 
 int main(void){
-    tptr lista;
-    lista=NULL;
-    agregar_lista_nodos(&lista);
-    mostrar_lista_nodos(lista);
-
+    tptr ini,fin;
+    ini=NULL;
+    fin=NULL;
+    carga_lista_nodos(&ini,&fin);
+    muestra_lista_nodos(ini);
     return 0;
 }
 
 
 int random(void){
-    return rand();
+    int x,y;
+    x=1;y=100;
+    return x+rand()%(y-x+1);
 }
 
 tptr retorna_nodo(int valor){
     tptr aux;
-    aux = (tptr)malloc(sizeof(tnodo));
-    if (aux == NULL)
-    {
-        printf("Error: no se pudo asignar memoria\n");
-    }
+    aux=(tptr)malloc(sizeof(tnodo));
     aux->dato = valor;
     aux->sig = NULL;
     return aux;
@@ -61,53 +60,6 @@ void agregar_pila(tptr *cabeza, tptr nuevo)
     *cabeza = nuevo;
 }
 
-void agregar_cola(tptr *inicio, tptr *fin, tptr nuevo){
-    if (*inicio == NULL)
-    {
-        /* Cola vacia: el nuevo nodo es el inicio y el fin */
-        *inicio = nuevo;
-        *fin = nuevo;
-    }
-    else
-    {
-        /* Agregar al final */
-        (*fin)->sig = nuevo;
-        *fin = nuevo;
-    }
-}
-
-void carga_lista_nodos(tptr *lista){
-    tptr nuevo;
-    tptr ini,fin;
-    int r,b,n,i;
-    b=0;
-    printf("\ningrese el tamanio de la lista:");
-    scanf("%d", &n);
-    for(i=1; i<=n; i++){
-        srand(time(NULL));
-        r=random();
-        if(b==0){
-            nuevo=retorna_nodo(r);
-            agregar_pila(lista,nuevo);
-            b=1;
-            ini=*lista;
-            fin=*lista;
-        }
-        else{
-            if((r%2)==0){
-                nuevo=retorna_nodo(r);
-                agregar_pila(lista,nuevo);
-                ini=*lista;
-            }
-            else{
-                nuevo=retorna_nodo(r);
-                agregar_cola(&ini,&fin,nuevo);
-            }
-        }
-    }
-    
-}
-void mostrar_un_nodo(tnodo);
 void muestra_lista_nodos(tptr lista){
     if(lista!=NULL){
         printf("\nelementos de la lista de nodos:\n");
@@ -119,4 +71,51 @@ void muestra_lista_nodos(tptr lista){
     }
     else
         printf("\nlista vacia.");
+}
+
+void enqueue(tptr *ini,tptr *fin,tptr nuevo){
+    if(nuevo!=NULL){
+        if(*ini!=NULL){
+            *ini=nuevo;
+            *fin=nuevo;
+        }
+        else{
+            (*fin)->sig=nuevo;
+            *fin=nuevo;
+        }
+    }
+}
+
+void carga_lista_nodos(tptr *ini,tptr *fin){
+    tptr nuevo;
+    int dato,n,i,b;
+    b=1;
+    printf("\ningrese el tamanio  de la lista:");
+    scanf("%d",&n);
+    for (i=1; i<=n; i++){
+        srand(time(NULL));
+        dato=random();
+        nuevo=retorna_nodo(dato);
+        if(b==1){
+            enqueue(ini,fin,nuevo);
+            b=1;
+        }
+        else{
+            if(dato%2==0){
+                agregar_pila(ini,nuevo);
+            }
+            else
+                enqueue(ini,fin,nuevo);
+        }
+    }
+}
+
+void liberar(tptr *ini){
+    tptr aux;
+    while(*ini!=NULL){
+        aux=*ini;
+        *ini=(*ini)->sig;
+        free(aux);
+        aux=NULL;
+    }
 }

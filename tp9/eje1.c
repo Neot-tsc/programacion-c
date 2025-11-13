@@ -16,7 +16,7 @@ void cargar_lista_nodos(tpuntero*);
 void mostrar_lista_nodos(tpuntero);
 void par_menor(tpuntero);
 int expreccion(int,int);
-
+void liberar_lista(tpuntero*);
 
 
 

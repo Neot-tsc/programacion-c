@@ -101,8 +101,25 @@ void modifica_tarticulo_precio(tarticulo *a){
 
 //proceddimiento y funciones de tptr
 
-tptr retorna_nodo(long int);
-void carga_lista_nodos(tptr*);
+tptr retorna_nodo(long int n){
+	tptr aux;
+	aux=(tptr)malloc(sizeof(tnodo));
+	aux->dato=retorna_articulo(n);
+	aux->sig=NULL;
+	return aux;
+}
+tptr carga_lista_nodos(){
+	tptr cab,nuevo;
+	int i,n;
+	printf("\ningrese la cantidad de productos a ingresar en la lista:");
+	scanf("%d", &n);
+	for(i=1; i<=n; i++){
+		nuevo->dato=retornar_articulo();
+		cola(&cab,nuevo);
+	}
+	printf("\nlist cargado con exito");
+}
+
 void pila(tptr*,tptr);
 void cola(tptr*,tptr);
 void mostrar_lista_nodos(tptr);

@@ -136,7 +136,8 @@ void inserta_ordenado(tptr *cabeza,tptr nuevo){
 		if(ant==NULL)
 			agrega_pila(cabeza,nuevo);
 		else{
-				agrega_cola(cabeza,nuevo);
+				ant->sig=nuevo;
+				nuevo->sig=aux;
 			}
 		}
 		

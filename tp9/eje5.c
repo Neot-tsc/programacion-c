@@ -50,7 +50,7 @@ void elimina_uno(tptr *, long int );
 tptr crea_lis_por_stok(tptr);
 int prom_stok(tptr);
 int nrorandom(int, int);
-
+int evalua_nodo_cod(tptr,tptr);
 
 int menu(void);
 
@@ -153,7 +153,7 @@ void muestra_articulo(tarticulo a){
     printf("\ncodigo del articulo: %ld", a.codigo);
     printf("\nnombre del articulo: %s", a.nombre);
     printf("\ncantidad de stok del articulo: %d", a.stok);
-    printf("\nprecio del articulo: %f.2", a.precio);
+    printf("\nprecio del articulo: %.2f", a.precio);
 }
 
 void modifica_tarticulo_precio(tarticulo *a){
@@ -197,13 +197,16 @@ tptr retorna_nodo(long int n){
 	return aux;
 }
 tptr carga_lista_nodos(){
+	/* inicializar cabeza antes de usarla */
 	tptr cab;
+    cab=NULL;
     long int cod;
 	int i,n,r;
 	printf("\ningrese la cantidad de productos a ingresar en la lista:");
 	scanf("%d", &n);
     i=1;
 	while(i<=n){
+        printf("\nelemnto nro %d\n", i);
         printf("\ningrese el codigo: ");
         scanf("%ld",&cod);
         r=buscar(cab,cod);
@@ -236,17 +239,23 @@ void inserta_orenado(tptr *cab,tptr nuevo){
     int r;
     aux=NULL;
     ant=NULL;
-    if(*cab!=NULL){
+    if(*cab==NULL)
+        *cab=nuevo;
+    
+    else{
         aux=*cab;
         ant=NULL;
+        r=evalua_nodo_cod(*cab,nuevo);
         while ((aux!=NULL) && (r=-1)){
             ant=aux;
             aux=aux->sig;
+            r=evalua_nodo_cod(*cab,nuevo);
         }
         if(ant==NULL)
             pila(cab,nuevo);
         else
             cola(cab,nuevo);
+        
     }
 }
 
@@ -317,6 +326,7 @@ void liberar_lista(tptr *cab){
 
 void agregar_uno(tptr *cab,long int n){
     tptr nuevo;
+    nuevo=NULL;
     nuevo=retorna_nodo(n);
     inserta_orenado(cab,nuevo);
 }
@@ -340,6 +350,7 @@ void mostrar_por_nombre(tptr cab){
     int r,op;
     r=0;
     printf("\ningrese el nombre del articulo a buscar:");
+    fflush(stdin);
     leecad(n);
     if(cab != NULL){
         while(cab != NULL){

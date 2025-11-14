@@ -46,10 +46,10 @@ tptr carga_lista_nodo(void){
 		if(n>0){
 			nuevo=retorna_nodo(n);
 			pila(&cab,nuevo);
+			/*cola(&cab,nuevo);*/
 		}
 		else 
 		   printf("\ncarga finalizada.");
-		
 	}while(n>0);
 	
 	return cab;
@@ -96,10 +96,15 @@ void pila(tptr *cab,tptr nuevo){
 	nuevo->sig=*cab;
 	*cab=nuevo;
 }
-void cola(tptr *cab,tptr nuevo){
+void cola(tptr *cabeza,tptr nuevo){
 	tptr aux;
-	aux=*cab;
-	while(aux->sig != NULL)
-		aux=aux->sig;
-	aux->sig=nuevo;
+	aux=*cabeza;
+	if(*cabeza!=NULL){
+		while(aux->sig!=NULL){
+			aux=aux->sig;
+		}
+		aux->sig = nuevo;
+	}
+	else 
+		*cabeza=nuevo;
 }

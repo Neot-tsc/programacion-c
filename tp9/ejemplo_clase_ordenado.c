@@ -86,10 +86,15 @@ void cola(tptr *cabeza,tptr nuevo){
 /* Nueva función: cola_segura - igual firma que cola, pero implementada sin modificar cola() */
 void agrega_cola(tptr *cabeza, tptr nuevo){
 	tptr aux;
-        aux = *cabeza;
-        while (aux->sig != NULL)
-            aux = aux->sig;
-        aux->sig = nuevo;
+	aux=*cabeza;
+	if(*cabeza!=NULL){
+		while(aux->sig!=NULL){
+			aux=aux->sig;
+		}
+		aux->sig = nuevo;
+	}
+	else 
+		*cabeza=nuevo;
 }
 
 /* Extrae y devuelve el primer nodo de la lista (cola). Retorna NULL si lista vacía. */

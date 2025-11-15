@@ -39,14 +39,21 @@ tptr retorna_nodo(int n){
 }
 tptr carga_lista_nodo(void){
 	tptr cab,nuevo;
-	int n;
+	cab=NULL;
+	int n,b;
+	b=0;
 	do{
 		printf("\ningrese un numero natural(ingrese 0 para finalizar)");
 		scanf("%d", &n);
 		if(n>0){
 			nuevo=retorna_nodo(n);
 			pila(&cab,nuevo);
-			/*cola(&cab,nuevo);*/
+			/*if(b==0){
+				pila(&cab,nuevo);
+				b=1;
+			}
+			else
+				cola(&cab,nuevo);*/
 		}
 		else 
 		   printf("\ncarga finalizada.");

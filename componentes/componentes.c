@@ -754,6 +754,7 @@ int busqueda_secuencial_recursiva (Tlista a, int n, int buscado){
 //quick sort
 //metdo de ordenamiento en base a sub listas generadas por un pivote
 
+/* QuickSort de menor a mayor (ascendente) */
 void quick_sort(Tlista a, int ini, int fin){
 	int izq,der,piv;
     if(ini < fin){
@@ -774,6 +775,30 @@ void quick_sort(Tlista a, int ini, int fin){
         a[izq] = piv;  
         quick_sort(a, ini, izq-1);
         quick_sort(a, izq+1, fin);
+    }
+}
+
+/* QuickSort de mayor a menor (descendente) */
+void quick_sort_desc(Tlista a, int ini, int fin){
+	int izq,der,piv;
+    if(ini < fin){
+        izq = ini;
+        der = fin;
+        piv = a[ini];
+        
+        while(izq < der){
+            while(izq < der && a[der] <= piv)  /* <= en vez de >= */
+                der--;
+            if(izq < der)
+                a[izq] = a[der];
+            while(izq < der && a[izq] >= piv)  /* >= en vez de <= */
+                izq++;
+            if(izq < der)
+                a[der] = a[izq];
+        }
+        a[izq] = piv;  
+        quick_sort_desc(a, ini, izq-1);
+        quick_sort_desc(a, izq+1, fin);
     }
 }
 
@@ -811,6 +836,36 @@ void marge(Tlista a, int ini, int med, int fin){
 		a[ini+t-1]=aux[t];
 }
 
+/* MergeSort de menor a mayor (ascendente) */
+void marge(Tlista a, int ini, int med, int fin){
+	Tlista aux;
+	int i,j,k,t;
+	k=0;
+	i=ini;
+	j=med+1;
+	while(i<=med && j<=fin){
+		k++;
+		if(a[i]<a[j]){
+			aux[k]=a[i];
+			i++;
+		}
+		else{
+			aux[k]=a[j];
+			j++;
+		}
+	}
+	for(t=i; t<=med; t++){
+		k++;
+		aux[k]=a[t];
+	}
+	for(t=j; t<=fin; t++){
+		k++;
+		aux[k]=a[t];
+	}
+	for(t=1; t<=k; t++)
+		a[ini+t-1]=aux[t];
+}
+
 void m_sort(Tlista a, int ini, int fin){
 	int med;
 	if(ini<fin){
@@ -818,6 +873,46 @@ void m_sort(Tlista a, int ini, int fin){
 		m_sort(a, ini, med);
 		m_sort(a, med+1, fin);
 		marge(a, ini, med, fin);
+	}
+}
+
+/* MergeSort de mayor a menor (descendente) */
+void marge_desc(Tlista a, int ini, int med, int fin){
+	Tlista aux;
+	int i,j,k,t;
+	k=0;
+	i=ini;
+	j=med+1;
+	while(i<=med && j<=fin){
+		k++;
+		if(a[i]>a[j]){  /* > en vez de < */
+			aux[k]=a[i];
+			i++;
+		}
+		else{
+			aux[k]=a[j];
+			j++;
+		}
+	}
+	for(t=i; t<=med; t++){
+		k++;
+		aux[k]=a[t];
+	}
+	for(t=j; t<=fin; t++){
+		k++;
+		aux[k]=a[t];
+	}
+	for(t=1; t<=k; t++)
+		a[ini+t-1]=aux[t];
+}
+
+void m_sort_desc(Tlista a, int ini, int fin){
+	int med;
+	if(ini<fin){
+		med=(ini+fin)/2;
+		m_sort_desc(a, ini, med);
+		m_sort_desc(a, med+1, fin);
+		marge_desc(a, ini, med, fin);
 	}
 }
 

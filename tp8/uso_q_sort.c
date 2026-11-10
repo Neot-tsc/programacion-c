@@ -9,7 +9,7 @@ void carga(tlista, int*);
 void carga_rec(tlista, int);
 void mostrar(tlista, int);
 void mostrar_rec(tlista, int);
-void quick_sort(tlista, int, int);
+void qsort(tlista, int, int);
 
 
 int main(void){
@@ -54,7 +54,7 @@ void mostrar(tlista a, int n){
     }
  }
 
-void quick_sort(tlista a, int ini, int fin){
+void qsort(tlista a, int ini, int fin){
     int izq,der,piv;
     if(ini<fin){
         izq=ini;

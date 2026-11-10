@@ -1,5 +1,5 @@
-#inlcude "TAD_LISTA_CUENTAS_H"
-#inlcude "TAD_CUENTA_H" 
+#include "TAD_LISTA_CUENTAS_H"
+#include "TAD_CUENTA_H" 
 
 tlista cargar_lista(){
 	tlista aux;

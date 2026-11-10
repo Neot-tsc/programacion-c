@@ -1,18 +1,37 @@
 #include <stdio.h>
-/*Ejercicio 6: Dados tres números naturales correspondientes a día, mes y año de una fecha, indicar si dicha fecha es válida.*/
-
+/*Ejercicio 6: Dados tres nï¿½meros naturales correspondientes a dï¿½a, mes y aï¿½o de una fecha, indicar si dicha fecha es vï¿½lida.*/
+int validacion(int,int,int);
 
 int main(int argc, char *argv[]) {
-	int dia,mes,año;
+	int dia,mes,aÃ±o;
+	int fecha_valida;
 	printf("\ningrese el dia:");
 	scanf("%d", &dia);
 	printf("\ningrese el mes:");
 	scanf("%d", &mes);
-	printf("\ningrese el año:");
-	scanf("%d", &año);
-	if(año<1900 || año>2025)
-		printf("\ndatos no validos");
+	printf("\ningrese el aÃ±o:");
+	scanf("%d", &aÃ±o);
+	fecha_valida = validacion(dia, mes, aÃ±o);
+	if(fecha_valida)
+		printf("\nfecha valida\n");
+		else
+			printf("\ndatos no validos\n");
 	
 	return 0;
 }
 
+int validacion(int dia, int mes, int aÃ±o){
+	int diasMes;
+
+	if(aÃ±o < 1900 || aÃ±o > 2025 || mes < 1 || mes > 12 || dia < 1)
+		return 0;
+
+	if(mes == 2)
+		diasMes = ((aÃ±o % 400 == 0) || (aÃ±o % 4 == 0 && aÃ±o % 100 != 0)) ? 29 : 28;
+	else if(mes == 4 || mes == 6 || mes == 9 || mes == 11)
+		diasMes = 30;
+	else
+		diasMes = 31;
+
+	return dia <= diasMes;
+}

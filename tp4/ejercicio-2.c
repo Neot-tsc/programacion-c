@@ -254,7 +254,3 @@ int busqueda_secuencial(Tlista a, int n, int buscado){
 	else pos=0;
 	return pos;
 }
-
-
-
-
